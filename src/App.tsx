@@ -4,6 +4,8 @@ import { useActivePage } from "@/hooks/use-active-page";
 import { DashboardPage } from "@/components/dashboard/dashboard-page";
 import { PipelinePage } from "@/components/pipeline/pipeline-page";
 
+import { TalentPoolPage } from "@/components/talent-pool/talent-pool-page";
+
 function App() {
   const { activePage, navigate } = useActivePage();
 
@@ -19,9 +21,7 @@ function App() {
         >
           {activePage === "dashboard" && <DashboardPage />}
           {activePage === "pipeline" && <PipelinePage />}
-          {activePage === "talent-pool" && (
-            <div className="text-muted-foreground text-sm">Talent Pool — coming soon</div>
-          )}
+          {activePage === "talent-pool" && <TalentPoolPage />}
           {activePage === "jobs" && (
             <div className="text-muted-foreground text-sm">Jobs — coming soon</div>
           )}

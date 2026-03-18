@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Search, Sparkles, Bell, ChevronDown, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Search, Sparkles, Bell, ChevronDown, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export function TopNav() {
   const [searchFocused, setSearchFocused] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-border bg-card/80 backdrop-blur-md">
@@ -18,9 +18,7 @@ export function TopNav() {
           </div>
           <div className="hidden sm:flex flex-col leading-none">
             <span className="text-sm font-black tracking-tight text-foreground">Triolla</span>
-            <span className="text-[10px] font-medium text-muted-foreground tracking-widest uppercase">
-              Talent OS
-            </span>
+            <span className="text-[10px] font-medium text-muted-foreground tracking-widest uppercase">Talent OS</span>
           </div>
         </div>
 
@@ -30,10 +28,10 @@ export function TopNav() {
             animate={searchFocused ? { scale: 1.01 } : { scale: 1 }}
             transition={{ duration: 0.15 }}
             className={cn(
-              "flex items-center gap-2 h-9 rounded-xl border bg-muted/50 px-3 transition-all duration-200",
+              'flex items-center gap-2 h-9 rounded-xl border bg-muted/50 px-3 transition-all duration-200',
               searchFocused
-                ? "border-primary/40 shadow-[0_0_0_3px_oklch(0.55_0.25_275_/_0.12)] bg-card"
-                : "border-transparent hover:border-border hover:bg-muted/80"
+                ? 'border-primary/40 shadow-[0_0_0_3px_oklch(0.55_0.25_275/0.12)] bg-card'
+                : 'border-transparent hover:border-border hover:bg-muted/80',
             )}
           >
             <Search className="w-4 h-4 text-muted-foreground shrink-0" />
@@ -52,7 +50,7 @@ export function TopNav() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  onClick={() => setSearchValue("")}
+                  onClick={() => setSearchValue('')}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -65,11 +63,7 @@ export function TopNav() {
         {/* Right section */}
         <div className="flex items-center gap-1.5 ml-auto shrink-0">
           {/* Ask AI button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hidden sm:flex items-center gap-1.5 h-8 px-3 hover:bg-ai-amber/10 group"
-          >
+          <Button variant="ghost" size="sm" className="hidden sm:flex items-center gap-1.5 h-8 px-3 hover:bg-ai-amber/10 group">
             <Sparkles className="w-3.5 h-3.5 text-ai-amber group-hover:scale-110 transition-transform" />
             <span className="ai-shimmer text-sm font-semibold">Ask AI</span>
           </Button>

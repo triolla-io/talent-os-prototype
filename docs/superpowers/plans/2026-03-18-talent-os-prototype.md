@@ -15,6 +15,7 @@
 **Aesthetic:** "Refined Productivity" — the intersection of Linear's precision, Notion's warmth, and Apple's polish. Clean layouts with moments of delight. The AI elements feel alive with warm amber/gold accents and subtle glow effects.
 
 **Key WOW Moments:**
+
 1. **Animated number counters** on dashboard metrics that count up from 0
 2. **AI shimmer effect** — a warm gradient pulse on AI-related elements
 3. **Staggered entrance animations** — cards and sections fade+slide in with orchestrated delays
@@ -27,10 +28,12 @@
 10. **Duplicate detection alert** that slides in with attention-grabbing animation
 
 **Typography:**
+
 - **Primary font:** Plus Jakarta Sans (variable weight 200–800) — geometric, friendly, modern, distinctive
 - **Weight hierarchy:** 800 for page titles, 700 for section headings, 600 for card titles, 500 for body emphasis, 400 for body text, 300 for muted/secondary
 
 **Color Palette (oklch for Tailwind CSS 4):**
+
 - **Background:** Warm off-white `oklch(0.985 0.002 90)` — NOT pure white, subtle warmth
 - **Surface (cards):** `oklch(1 0 0)` — pure white for contrast against warm bg
 - **Primary:** Rich indigo `oklch(0.55 0.25 275)` — confident, tech-forward
@@ -44,6 +47,7 @@
 - **Ring/Focus:** Primary at 30% opacity
 
 **Animations (motion library patterns):**
+
 - **Entrance:** `initial={{ opacity: 0, y: 20 }}` → `animate={{ opacity: 1, y: 0 }}` with `transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}`
 - **Stagger children:** Parent uses `staggerChildren: 0.08` in `transition`
 - **Hover lift:** `whileHover={{ y: -2, boxShadow: "0 8px 30px rgba(0,0,0,0.08)" }}`
@@ -119,6 +123,7 @@ src/
 ### Task 1: Install Dependencies
 
 **Files:**
+
 - Modify: `package.json`
 
 - [ ] **Step 1: Install runtime dependencies**
@@ -136,6 +141,7 @@ npm uninstall @fontsource-variable/inter
 - [ ] **Step 3: Verify all required shadcn/ui components exist**
 
 Run `ls src/components/ui/` and verify `button.tsx` exists. If missing, run:
+
 ```bash
 npx shadcn@latest add button
 ```
@@ -162,6 +168,7 @@ git commit -m "chore: add motion, dnd-kit, Plus Jakarta Sans; remove Inter font"
 ### Task 2: Design System — Update CSS Tokens & Custom Animations
 
 **Files:**
+
 - Modify: `src/index.css`
 
 This is the most important task. It establishes the entire visual identity.
@@ -169,10 +176,10 @@ This is the most important task. It establishes the entire visual identity.
 - [ ] **Step 1: Replace `src/index.css` with the new design system**
 
 ```css
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/plus-jakarta-sans";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/plus-jakarta-sans';
 /* Note: @fontsource-variable/inter was removed — Plus Jakarta Sans replaces it */
 
 @custom-variant dark (&:is(.dark *));
@@ -184,7 +191,7 @@ This is the most important task. It establishes the entire visual identity.
 
 :root {
   /* Typography */
-  --font-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
 
   /* Layout */
   --radius: 0.75rem;
@@ -374,36 +381,62 @@ html {
 
 body {
   @apply bg-background text-foreground;
-  font-feature-settings: "cv11", "ss01";
+  font-feature-settings: 'cv11', 'ss01';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom keyframes for AI effects */
 @keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 @keyframes ai-pulse {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
 }
 
 @keyframes slide-indicator {
-  from { transform: translateY(var(--indicator-from, 0)); }
-  to { transform: translateY(var(--indicator-to, 0)); }
+  from {
+    transform: translateY(var(--indicator-from, 0));
+  }
+  to {
+    transform: translateY(var(--indicator-to, 0));
+  }
 }
 
 @keyframes gradient-border {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes typing-cursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Utility classes for AI effects */
@@ -427,7 +460,7 @@ body {
   position: relative;
 }
 .ai-glow-border::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: -1px;
   border-radius: inherit;
@@ -435,15 +468,19 @@ body {
   background: linear-gradient(135deg, var(--ai-amber), var(--ai-coral), var(--ai-amber));
   background-size: 200% 200%;
   animation: gradient-border 4s ease infinite;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   pointer-events: none;
 }
 
 .typing-cursor::after {
-  content: "▊";
+  content: '▊';
   animation: typing-cursor 0.8s step-end infinite;
   color: var(--ai-amber);
   margin-left: 1px;
@@ -486,6 +523,7 @@ git commit -m "feat: establish design system — Plus Jakarta Sans, warm palette
 ### Task 3: TypeScript Types
 
 **Files:**
+
 - Create: `src/types/index.ts`
 
 - [ ] **Step 1: Create all shared types**
@@ -493,36 +531,36 @@ git commit -m "feat: establish design system — Plus Jakarta Sans, warm palette
 ```typescript
 // src/types/index.ts
 
-export type PageId = "dashboard" | "pipeline" | "talent-pool" | "jobs" | "ai-agents" | "reports";
+export type PageId = 'dashboard' | 'pipeline' | 'talent-pool' | 'jobs' | 'ai-agents' | 'reports';
 
 export interface Candidate {
   id: string;
   name: string;
   email: string;
   phone: string;
-  avatar: string;        // URL or initials placeholder
-  role: string;          // Role they applied for
-  aiScore: number;       // 0-100 AI match score
-  source: string;        // "LinkedIn", "Agency - TechHunt", "Referral", etc.
-  appliedDate: string;   // ISO date string
+  avatar: string; // URL or initials placeholder
+  role: string; // Role they applied for
+  aiScore: number; // 0-100 AI match score
+  source: string; // "LinkedIn", "Agency - TechHunt", "Referral", etc.
+  appliedDate: string; // ISO date string
   status: PipelineStage;
   skills: string[];
-  experience: string;    // "5 years", "Senior", etc.
+  experience: string; // "5 years", "Senior", etc.
   location: string;
   isDuplicate?: boolean;
   duplicateSource?: string; // "Agency - TechHunt submitted this candidate who already exists"
   notes?: string;
 }
 
-export type PipelineStage = "new" | "screening" | "interview" | "offer" | "hired" | "rejected";
+export type PipelineStage = 'new' | 'screening' | 'interview' | 'offer' | 'hired' | 'rejected';
 
 export interface Job {
   id: string;
   title: string;
   department: string;
   location: string;
-  type: "full-time" | "part-time" | "contract";
-  status: "active" | "draft" | "closed" | "paused";
+  type: 'full-time' | 'part-time' | 'contract';
+  status: 'active' | 'draft' | 'closed' | 'paused';
   candidateCount: number;
   postedDate: string;
   description?: string;
@@ -535,11 +573,11 @@ export interface AIAgent {
   id: string;
   name: string;
   description: string;
-  status: "active" | "paused" | "idle";
-  icon: string;           // lucide icon name
+  status: 'active' | 'paused' | 'idle';
+  icon: string; // lucide icon name
   lastActivity: string;
   processedToday: number;
-  successRate: number;     // 0-100
+  successRate: number; // 0-100
   activities: AgentActivity[];
 }
 
@@ -549,7 +587,7 @@ export interface AgentActivity {
   action: string;
   target: string;
   timestamp: string;
-  status: "completed" | "in-progress" | "failed";
+  status: 'completed' | 'in-progress' | 'failed';
 }
 
 export interface DashboardMetrics {
@@ -562,8 +600,8 @@ export interface DashboardMetrics {
 export interface Priority {
   id: string;
   text: string;
-  type: "review" | "follow-up" | "action" | "ai-suggestion";
-  urgency: "high" | "medium" | "low";
+  type: 'review' | 'follow-up' | 'action' | 'ai-suggestion';
+  urgency: 'high' | 'medium' | 'low';
   relatedCount?: number;
   completed: boolean;
 }
@@ -571,7 +609,7 @@ export interface Priority {
 export interface AIInsight {
   id: string;
   text: string;
-  type: "prediction" | "recommendation" | "alert";
+  type: 'prediction' | 'recommendation' | 'alert';
   confidence: number;
 }
 
@@ -602,6 +640,7 @@ git commit -m "feat: add TypeScript types for all domain entities"
 ### Task 4: Mock Data
 
 **Files:**
+
 - Create: `src/lib/mocks/candidates.ts`
 - Create: `src/lib/mocks/jobs.ts`
 - Create: `src/lib/mocks/agents.ts`
@@ -615,6 +654,7 @@ Create `src/lib/mocks/candidates.ts` with 20+ realistic candidates. Use diverse 
 **Export name:** `export const mockCandidates: Candidate[]`
 
 Key data points to make the prototype feel real:
+
 - Mix of high-score (85+) and low-score (below 60) candidates
 - At least 3 candidates in each pipeline stage
 - 2 candidates flagged as duplicates from agency sources
@@ -627,6 +667,7 @@ Create `src/lib/mocks/jobs.ts` — **Export name:** `export const mockJobs: Job[
 - [ ] **Step 3: Create agents mock data**
 
 Create `src/lib/mocks/agents.ts` — **Export name:** `export const mockAgents: AIAgent[]` — with 6 AI agents:
+
 1. **Auto-Enrichment Agent** — enriches candidate profiles with public data (active, processed 23 today)
 2. **Outreach Agent** — sends personalized outreach emails (active, processing 5 emails)
 3. **Screening Agent** — auto-screens CVs via text + voice analysis (NO video) against job requirements (active, screened 12 today). Description must mention "Text & Voice screening" to reflect the PRD constraint that there is no video screening.
@@ -639,12 +680,14 @@ Each agent has 3-5 recent activities with timestamps.
 - [ ] **Step 4: Create metrics and priorities mock data**
 
 Create `src/lib/mocks/metrics.ts` — **Export names:** `export const dashboardMetrics: DashboardMetrics`, `export const pipelineChartData: ChartDataPoint[]`, `export const hiringTrendData: ChartDataPoint[]`, `export const sourceDistributionData: ChartDataPoint[]` — with:
+
 - Dashboard metrics: `{ activeRoles: 5, candidatesInPipeline: 87, monthlyHires: 2, aiConfidenceScore: 91 }`
 - Pipeline chart data (candidates per stage)
 - Hiring trend data (last 6 months)
 - Source distribution data
 
 Create `src/lib/mocks/priorities.ts` — **Export names:** `export const mockPriorities: Priority[]`, `export const mockInsights: AIInsight[]` — with:
+
 - 5 priorities: "Review 3 strong Senior PM candidates" (high), "Follow up with 8 candidates from last week" (medium), "New JD ready for 'Head of Sales'" (low/AI), "Schedule 2 final interviews" (medium), "Review AI screening results for Frontend role" (high)
 - 3 AI insights: "3 candidates in your Talent Pool are likely to respond this week", "Your screening-to-interview conversion is 15% above industry average", "2 candidates from TechHunt Agency are duplicates — potential savings of $12,000"
 
@@ -668,16 +711,17 @@ git commit -m "feat: add comprehensive mock data for all views"
 ### Task 5: Page Navigation Hook
 
 **Files:**
+
 - Create: `src/hooks/use-active-page.ts`
 
 - [ ] **Step 1: Create the navigation state hook**
 
 ```typescript
 // src/hooks/use-active-page.ts
-import { useState, useCallback } from "react";
-import type { PageId } from "@/types";
+import { useState, useCallback } from 'react';
+import type { PageId } from '@/types';
 
-export function useActivePage(initialPage: PageId = "dashboard") {
+export function useActivePage(initialPage: PageId = 'dashboard') {
   const [activePage, setActivePage] = useState<PageId>(initialPage);
 
   const navigate = useCallback((page: PageId) => {
@@ -700,6 +744,7 @@ git commit -m "feat: add page navigation state hook"
 ### Task 6: Shared Components — AI Shimmer, Score Badge, Animated Counter, Page Header
 
 **Files:**
+
 - Create: `src/components/shared/ai-shimmer.tsx`
 - Create: `src/components/shared/score-badge.tsx`
 - Create: `src/components/shared/animated-counter.tsx`
@@ -710,7 +755,7 @@ git commit -m "feat: add page navigation state hook"
 
 ```typescript
 // src/hooks/use-animated-counter.ts
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
 
 export function useAnimatedCounter(target: number, duration: number = 1200) {
   const [count, setCount] = useState(0);
@@ -748,20 +793,16 @@ export function useAnimatedCounter(target: number, duration: number = 1200) {
 
 ```tsx
 // src/components/shared/ai-shimmer.tsx
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 interface AIShimmerProps {
   children: React.ReactNode;
   className?: string;
-  as?: "span" | "div" | "p";
+  as?: 'span' | 'div' | 'p';
 }
 
-export function AIShimmer({ children, className, as: Tag = "span" }: AIShimmerProps) {
-  return (
-    <Tag className={cn("ai-shimmer font-semibold", className)}>
-      {children}
-    </Tag>
-  );
+export function AIShimmer({ children, className, as: Tag = 'span' }: AIShimmerProps) {
+  return <Tag className={cn('ai-shimmer font-semibold', className)}>{children}</Tag>;
 }
 
 interface AIGlowCardProps {
@@ -770,11 +811,7 @@ interface AIGlowCardProps {
 }
 
 export function AIGlowCard({ children, className }: AIGlowCardProps) {
-  return (
-    <div className={cn("ai-glow-border rounded-xl", className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn('ai-glow-border rounded-xl', className)}>{children}</div>;
 }
 ```
 
@@ -784,18 +821,18 @@ A circular badge showing the AI match score. Uses SVG for the circular progress 
 
 ```tsx
 // src/components/shared/score-badge.tsx
-import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { cn } from '@/lib/utils';
+import { motion } from 'motion/react';
 
 interface ScoreBadgeProps {
   score: number;
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
-export function ScoreBadge({ score, size = "md", className }: ScoreBadgeProps) {
+export function ScoreBadge({ score, size = 'md', className }: ScoreBadgeProps) {
   const sizeMap = { sm: 32, md: 44, lg: 56 };
-  const fontSizeMap = { sm: "text-xs", md: "text-sm", lg: "text-base" };
+  const fontSizeMap = { sm: 'text-xs', md: 'text-sm', lg: 'text-base' };
   const strokeWidthMap = { sm: 3, md: 3.5, lg: 4 };
   const s = sizeMap[size];
   const strokeWidth = strokeWidthMap[size];
@@ -803,33 +840,27 @@ export function ScoreBadge({ score, size = "md", className }: ScoreBadgeProps) {
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (score / 100) * circumference;
 
-  const color =
-    score >= 80 ? "stroke-success" :
-    score >= 60 ? "stroke-warning" :
-    "stroke-destructive";
+  const color = score >= 80 ? 'stroke-success' : score >= 60 ? 'stroke-warning' : 'stroke-destructive';
 
   return (
-    <div className={cn("relative inline-flex items-center justify-center", className)} style={{ width: s, height: s }}>
+    <div className={cn('relative inline-flex items-center justify-center', className)} style={{ width: s, height: s }}>
       <svg width={s} height={s} className="-rotate-90">
-        <circle
-          cx={s / 2} cy={s / 2} r={radius}
-          fill="none"
-          strokeWidth={strokeWidth}
-          className="stroke-muted"
-        />
+        <circle cx={s / 2} cy={s / 2} r={radius} fill="none" strokeWidth={strokeWidth} className="stroke-muted" />
         <motion.circle
-          cx={s / 2} cy={s / 2} r={radius}
+          cx={s / 2}
+          cy={s / 2}
+          r={radius}
           fill="none"
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           className={color}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+          transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
           style={{ strokeDasharray: circumference }}
         />
       </svg>
-      <span className={cn("absolute font-bold", fontSizeMap[size])}>{score}</span>
+      <span className={cn('absolute font-bold', fontSizeMap[size])}>{score}</span>
     </div>
   );
 }
@@ -839,8 +870,8 @@ export function ScoreBadge({ score, size = "md", className }: ScoreBadgeProps) {
 
 ```tsx
 // src/components/shared/animated-counter.tsx
-import { useAnimatedCounter } from "@/hooks/use-animated-counter";
-import { cn } from "@/lib/utils";
+import { useAnimatedCounter } from '@/hooks/use-animated-counter';
+import { cn } from '@/lib/utils';
 
 interface AnimatedCounterProps {
   value: number;
@@ -850,11 +881,13 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-export function AnimatedCounter({ value, duration, suffix = "", prefix = "", className }: AnimatedCounterProps) {
+export function AnimatedCounter({ value, duration, suffix = '', prefix = '', className }: AnimatedCounterProps) {
   const count = useAnimatedCounter(value, duration);
   return (
-    <span className={cn("tabular-nums", className)}>
-      {prefix}{count}{suffix}
+    <span className={cn('tabular-nums', className)}>
+      {prefix}
+      {count}
+      {suffix}
     </span>
   );
 }
@@ -864,8 +897,8 @@ export function AnimatedCounter({ value, duration, suffix = "", prefix = "", cla
 
 ```tsx
 // src/components/shared/page-header.tsx
-import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+import { motion } from 'motion/react';
+import { cn } from '@/lib/utils';
 
 interface PageHeaderProps {
   title: string;
@@ -877,16 +910,14 @@ interface PageHeaderProps {
 export function PageHeader({ title, description, actions, className }: PageHeaderProps) {
   return (
     <motion.div
-      className={cn("flex items-start justify-between gap-4 mb-8", className)}
+      className={cn('flex items-start justify-between gap-4 mb-8', className)}
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
       <div>
         <h1 className="text-2xl font-extrabold tracking-tight">{title}</h1>
-        {description && (
-          <p className="text-muted-foreground mt-1 text-sm">{description}</p>
-        )}
+        {description && <p className="text-muted-foreground mt-1 text-sm">{description}</p>}
       </div>
       {actions && <div className="flex items-center gap-2 shrink-0">{actions}</div>}
     </motion.div>
@@ -912,11 +943,13 @@ git commit -m "feat: add shared components — AI shimmer, score badge, animated
 ### Task 7: Top Navigation Bar
 
 **Files:**
+
 - Create: `src/components/layout/top-nav.tsx`
 
 - [ ] **Step 1: Build the top nav**
 
 The top nav has three sections:
+
 - **Left:** Triolla logo (text-based: "Triolla" in bold + "Talent OS" in lighter weight)
 - **Center:** Global search bar with search icon, placeholder "Search candidates, jobs, or ask AI...", focus glow effect
 - **Right:** "Ask AI" button with sparkle icon (ai-shimmer gradient), notification bell with badge count (3), recruiter avatar dropdown
@@ -949,11 +982,13 @@ git commit -m "feat: add top navigation bar with search, AI button, and notifica
 ### Task 8: Sidebar Navigation
 
 **Files:**
+
 - Create: `src/components/layout/sidebar.tsx`
 
 - [ ] **Step 1: Build the sidebar**
 
 Desktop sidebar (hidden below `md` breakpoint):
+
 - Fixed width `w-64` (matches `--sidebar-width`)
 - Background `bg-sidebar` with right border
 - Full height below top nav: `h-[calc(100vh-4rem)]` `sticky top-16`
@@ -963,6 +998,7 @@ Desktop sidebar (hidden below `md` breakpoint):
 - Items grouped with section labels if needed
 
 Navigation items (from PRD):
+
 - 🏠 `LayoutDashboard` → Dashboard
 - 🔄 `Kanban` → Pipeline
 - 🏊 `Users` → Talent Pool
@@ -990,6 +1026,7 @@ git commit -m "feat: add sidebar with sliding active indicator animation"
 ### Task 9: Mobile Bottom Navigation
 
 **Files:**
+
 - Create: `src/components/layout/mobile-nav.tsx`
 - Create: `src/hooks/use-mobile.ts`
 
@@ -997,7 +1034,7 @@ git commit -m "feat: add sidebar with sliding active indicator animation"
 
 ```typescript
 // src/hooks/use-mobile.ts
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export function useMobile(breakpoint: number = 768) {
   const [isMobile, setIsMobile] = useState(false);
@@ -1005,8 +1042,8 @@ export function useMobile(breakpoint: number = 768) {
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < breakpoint);
     check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, [breakpoint]);
 
   return isMobile;
@@ -1035,6 +1072,7 @@ git commit -m "feat: add mobile bottom navigation bar"
 ### Task 10: App Layout Shell & Wire Up App.tsx
 
 **Files:**
+
 - Create: `src/components/layout/app-layout.tsx`
 - Modify: `src/App.tsx`
 
@@ -1042,10 +1080,10 @@ git commit -m "feat: add mobile bottom navigation bar"
 
 ```tsx
 // src/components/layout/app-layout.tsx
-import { TopNav } from "./top-nav";
-import { Sidebar } from "./sidebar";
-import { MobileNav } from "./mobile-nav";
-import type { PageId } from "@/types";
+import { TopNav } from './top-nav';
+import { Sidebar } from './sidebar';
+import { MobileNav } from './mobile-nav';
+import type { PageId } from '@/types';
 
 interface AppLayoutProps {
   activePage: PageId;
@@ -1059,9 +1097,7 @@ export function AppLayout({ activePage, onNavigate, children }: AppLayoutProps) 
       <TopNav />
       <div className="flex">
         <Sidebar activePage={activePage} onNavigate={onNavigate} />
-        <main className="flex-1 min-h-[calc(100vh-4rem)] p-6 md:p-8 pb-24 md:pb-8 overflow-y-auto">
-          {children}
-        </main>
+        <main className="flex-1 min-h-[calc(100vh-4rem)] p-6 md:p-8 pb-24 md:pb-8 overflow-y-auto">{children}</main>
       </div>
       <MobileNav activePage={activePage} onNavigate={onNavigate} />
     </div>
@@ -1073,9 +1109,9 @@ export function AppLayout({ activePage, onNavigate, children }: AppLayoutProps) 
 
 ```tsx
 // src/App.tsx
-import { AnimatePresence, motion } from "motion/react";
-import { AppLayout } from "@/components/layout/app-layout";
-import { useActivePage } from "@/hooks/use-active-page";
+import { AnimatePresence, motion } from 'motion/react';
+import { AppLayout } from '@/components/layout/app-layout';
+import { useActivePage } from '@/hooks/use-active-page';
 
 function App() {
   const { activePage, navigate } = useActivePage();
@@ -1088,14 +1124,14 @@ function App() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-          {activePage === "dashboard" && <div>Dashboard placeholder</div>}
-          {activePage === "pipeline" && <div>Pipeline placeholder</div>}
-          {activePage === "talent-pool" && <div>Talent Pool placeholder</div>}
-          {activePage === "jobs" && <div>Jobs placeholder</div>}
-          {activePage === "ai-agents" && <div>AI Agents placeholder</div>}
-          {activePage === "reports" && <div>Reports placeholder</div>}
+          {activePage === 'dashboard' && <div>Dashboard placeholder</div>}
+          {activePage === 'pipeline' && <div>Pipeline placeholder</div>}
+          {activePage === 'talent-pool' && <div>Talent Pool placeholder</div>}
+          {activePage === 'jobs' && <div>Jobs placeholder</div>}
+          {activePage === 'ai-agents' && <div>AI Agents placeholder</div>}
+          {activePage === 'reports' && <div>Reports placeholder</div>}
         </motion.div>
       </AnimatePresence>
     </AppLayout>
@@ -1112,6 +1148,7 @@ npm run dev
 ```
 
 Verify:
+
 - Top nav renders with logo, search, AI button, notifications, avatar
 - Sidebar renders with all 6 nav items, clicking switches active page
 - The active indicator slides smoothly between items
@@ -1134,11 +1171,13 @@ git commit -m "feat: wire up app layout shell with page transitions"
 ### Task 11: Welcome Card
 
 **Files:**
+
 - Create: `src/components/dashboard/welcome-card.tsx`
 
 - [ ] **Step 1: Build the welcome card**
 
 A large card at the top of the dashboard. Spans full width. Features:
+
 - Warm gradient background: from `primary/5` to `ai-amber/5` (very subtle, not garish)
 - Large greeting: "Good morning, Sarah." (use `text-2xl font-extrabold`)
 - Subtitle: "You have **12** new candidates today. **3** are high-potential." (numbers bolded, use `AnimatedCounter` for the numbers)
@@ -1162,6 +1201,7 @@ git commit -m "feat: add dashboard welcome card with animated counters"
 ### Task 12: Metrics Row
 
 **Files:**
+
 - Create: `src/components/dashboard/metrics-row.tsx`
 
 - [ ] **Step 1: Build the metrics row**
@@ -1169,12 +1209,14 @@ git commit -m "feat: add dashboard welcome card with animated counters"
 4 metric cards in a responsive grid (`grid grid-cols-2 lg:grid-cols-4 gap-4`).
 
 Each card:
+
 - White card with subtle border, rounded-xl
 - Small icon (color-coded) + metric label (muted, small)
 - Large number (using `AnimatedCounter`, `text-3xl font-extrabold`)
 - Small trend indicator below: "↑ 12% vs last month" in green or "→ same as last week" in muted
 
 Cards:
+
 1. **Active Roles** — `Briefcase` icon (primary color) — value: 5 — trend: "+2 this month"
 2. **In Pipeline** — `Users` icon (chart-2 color) — value: 87 — trend: "↑ 23% vs last month"
 3. **Hired This Month** — `Trophy` icon (success color) — value: 2 — trend: "On track for Q1 goal"
@@ -1198,6 +1240,7 @@ git commit -m "feat: add dashboard metrics row with animated counters and stagge
 ### Task 13: Today's Priorities
 
 **Files:**
+
 - Create: `src/components/dashboard/priorities-list.tsx`
 
 - [ ] **Step 1: Build the priorities list**
@@ -1205,6 +1248,7 @@ git commit -m "feat: add dashboard metrics row with animated counters and stagge
 A card with the title "Today's Priorities" and an AI sparkle badge "AI Suggested".
 
 List of 5 priority items. Each item:
+
 - Checkbox (clickable, toggles `completed` state)
 - Priority text
 - Right side: colored urgency badge (high = destructive variant, medium = default, low = secondary)
@@ -1231,6 +1275,7 @@ git commit -m "feat: add today's priorities with interactive checkboxes and AI s
 ### Task 14: Recent Applications
 
 **Files:**
+
 - Create: `src/components/dashboard/recent-applications.tsx`
 
 - [ ] **Step 1: Build recent applications section**
@@ -1240,6 +1285,7 @@ Section title: "Recent Applications" with a "View all →" link.
 Horizontal scrolling row of candidate cards (`overflow-x-auto`, custom scrollbar from CSS, `flex gap-4`). Show 8 candidates.
 
 Each mini card (`w-[200px] shrink-0`):
+
 - Avatar (48px circle, using dicebear URL or initials)
 - Name (font-semibold, truncate)
 - Applied role (muted, small, truncate)
@@ -1268,6 +1314,7 @@ git commit -m "feat: add recent applications horizontal scroll with candidate ca
 ### Task 15: AI Insights Panel
 
 **Files:**
+
 - Create: `src/components/dashboard/ai-insights-panel.tsx`
 
 - [ ] **Step 1: Build the AI insights panel**
@@ -1277,6 +1324,7 @@ This is the "wow" component of the dashboard. A card with the `ai-glow-border` e
 Header: "AI Insights" with a `Brain` icon using ai-shimmer.
 
 3 insight items, each with:
+
 - Icon based on type: `Lightbulb` (prediction), `Target` (recommendation), `AlertTriangle` (alert)
 - Text of the insight
 - Confidence percentage badge
@@ -1304,6 +1352,7 @@ git commit -m "feat: add AI insights panel with animated gradient border"
 ### Task 16: Dashboard Page Assembly
 
 **Files:**
+
 - Create: `src/components/dashboard/dashboard-page.tsx`
 - Modify: `src/App.tsx` — replace dashboard placeholder
 
@@ -1311,27 +1360,31 @@ git commit -m "feat: add AI insights panel with animated gradient border"
 
 ```tsx
 // src/components/dashboard/dashboard-page.tsx
-import { motion } from "motion/react";
-import { WelcomeCard } from "./welcome-card";
-import { MetricsRow } from "./metrics-row";
-import { PrioritiesList } from "./priorities-list";
-import { RecentApplications } from "./recent-applications";
-import { AIInsightsPanel } from "./ai-insights-panel";
+import { motion } from 'motion/react';
+import { WelcomeCard } from './welcome-card';
+import { MetricsRow } from './metrics-row';
+import { PrioritiesList } from './priorities-list';
+import { RecentApplications } from './recent-applications';
+import { AIInsightsPanel } from './ai-insights-panel';
 
 const stagger = {
-  animate: { transition: { staggerChildren: 0.1 } }
+  animate: { transition: { staggerChildren: 0.1 } },
 };
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } }
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 export function DashboardPage() {
   return (
     <motion.div variants={stagger} initial="initial" animate="animate" className="space-y-6">
-      <motion.div variants={fadeUp}><WelcomeCard /></motion.div>
-      <motion.div variants={fadeUp}><MetricsRow /></motion.div>
+      <motion.div variants={fadeUp}>
+        <WelcomeCard />
+      </motion.div>
+      <motion.div variants={fadeUp}>
+        <MetricsRow />
+      </motion.div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <motion.div variants={fadeUp} className="lg:col-span-2">
           <PrioritiesList />
@@ -1340,7 +1393,9 @@ export function DashboardPage() {
           <AIInsightsPanel />
         </motion.div>
       </div>
-      <motion.div variants={fadeUp}><RecentApplications /></motion.div>
+      <motion.div variants={fadeUp}>
+        <RecentApplications />
+      </motion.div>
     </motion.div>
   );
 }
@@ -1357,6 +1412,7 @@ npm run dev
 ```
 
 Verify:
+
 - All 5 sections render in correct layout
 - Staggered entrance animation plays — sections fade in one by one
 - Metrics numbers count up
@@ -1380,11 +1436,13 @@ git commit -m "feat: assemble complete dashboard with staggered entrance animati
 ### Task 17: Candidate Card Component
 
 **Files:**
+
 - Create: `src/components/pipeline/candidate-card.tsx`
 
 - [ ] **Step 1: Build the draggable candidate card**
 
 Used in the Kanban board. Each card shows:
+
 - Avatar (36px, circle) + Name (font-semibold) + Role (muted, small) — top row
 - AI Score badge (`ScoreBadge`, size="sm") — top right
 - Skills tags (2-3 max, using `Badge` component, secondary variant, small)
@@ -1413,6 +1471,7 @@ git commit -m "feat: add draggable candidate card with AI score and drag effects
 ### Task 18: Kanban Column
 
 **Files:**
+
 - Create: `src/components/pipeline/kanban-column.tsx`
 
 - [ ] **Step 1: Build the Kanban column**
@@ -1420,6 +1479,7 @@ git commit -m "feat: add draggable candidate card with AI score and drag effects
 A vertical droppable container. Props: `stage: PipelineStage`, `candidates: Candidate[]`, `title: string`.
 
 Layout:
+
 - Header: stage title (font-semibold) + candidate count badge
 - Color-coded top border (2px): New=primary, Screening=chart-2, Interview=chart-4, Offer=success, Hired=success, Rejected=destructive
 - **PRD constraint:** The Screening column header should include a small "Text + Voice" badge (no video icon crossed out) to visually indicate the text + voice only screening modality per PRD requirements
@@ -1442,6 +1502,7 @@ git commit -m "feat: add Kanban column with droppable area and color-coded heade
 ### Task 19: Kanban Board & Pipeline Page
 
 **Files:**
+
 - Create: `src/components/pipeline/kanban-board.tsx`
 - Create: `src/components/pipeline/pipeline-page.tsx`
 - Modify: `src/App.tsx` — replace pipeline placeholder
@@ -1464,10 +1525,10 @@ Sensors: `useSensor(PointerSensor, { activationConstraint: { distance: 5 } })` t
 
 ```tsx
 // src/components/pipeline/pipeline-page.tsx
-import { PageHeader } from "@/components/shared/page-header";
-import { KanbanBoard } from "./kanban-board";
-import { Button } from "@/components/ui/button";
-import { Plus, Filter } from "lucide-react";
+import { PageHeader } from '@/components/shared/page-header';
+import { KanbanBoard } from './kanban-board';
+import { Button } from '@/components/ui/button';
+import { Plus, Filter } from 'lucide-react';
 
 export function PipelinePage() {
   return (
@@ -1477,8 +1538,14 @@ export function PipelinePage() {
         description="Drag candidates between stages to update their status"
         actions={
           <>
-            <Button variant="outline" size="sm"><Filter className="w-4 h-4 mr-2" />Filter</Button>
-            <Button size="sm"><Plus className="w-4 h-4 mr-2" />Add Candidate</Button>
+            <Button variant="outline" size="sm">
+              <Filter className="w-4 h-4 mr-2" />
+              Filter
+            </Button>
+            <Button size="sm">
+              <Plus className="w-4 h-4 mr-2" />
+              Add Candidate
+            </Button>
           </>
         }
       />
@@ -1495,6 +1562,7 @@ Replace pipeline placeholder with `<PipelinePage />`.
 - [ ] **Step 4: Full verification**
 
 Verify:
+
 - 5 columns render with correct color-coded headers
 - Candidate cards appear in correct columns based on mock data status
 - Dragging a card: rotation tilt, shadow elevation, DragOverlay renders
@@ -1517,6 +1585,7 @@ git commit -m "feat: add Pipeline view with full drag-and-drop Kanban board"
 ### Task 20: Candidate Search Bar
 
 **Files:**
+
 - Create: `src/components/talent-pool/candidate-search.tsx`
 
 - [ ] **Step 1: Build the NLP-style search bar**
@@ -1524,6 +1593,7 @@ git commit -m "feat: add Pipeline view with full drag-and-drop Kanban board"
 A large search input that feels like it understands natural language.
 
 Features:
+
 - Large input (`h-12 text-base`), full width
 - Search icon on the left, clear button on right when text is entered
 - Placeholder: `"Search by name, skill, or describe who you're looking for..."` — cycles through 3 placeholders with a typing animation effect (optional: just use one)
@@ -1545,6 +1615,7 @@ git commit -m "feat: add NLP-style candidate search with filter chips"
 ### Task 21: Candidate Table
 
 **Files:**
+
 - Create: `src/components/talent-pool/candidate-table.tsx`
 
 - [ ] **Step 1: Build the table with TanStack Table**
@@ -1552,6 +1623,7 @@ git commit -m "feat: add NLP-style candidate search with filter chips"
 A data table using `@tanstack/react-table` showing all candidates.
 
 Columns:
+
 1. **Candidate** — avatar (32px) + name + email below (muted, small) — width: flexible
 2. **Role** — the role they applied for
 3. **AI Score** — `ScoreBadge` component, size="sm"
@@ -1561,6 +1633,7 @@ Columns:
 7. **Actions** — "View" button (ghost) + dropdown with "Edit", "Move to...", "Reject"
 
 Table styling:
+
 - Use shadcn table patterns but with custom styling
 - Alternating row backgrounds: every other row `bg-muted/30`
 - Hover: row highlights `bg-muted/50`
@@ -1585,6 +1658,7 @@ git commit -m "feat: add candidate table with TanStack Table, sorting, and pagin
 ### Task 22: Duplicate Detection Alert
 
 **Files:**
+
 - Create: `src/components/talent-pool/duplicate-alert.tsx`
 
 - [ ] **Step 1: Build the duplicate detection alert**
@@ -1592,6 +1666,7 @@ git commit -m "feat: add candidate table with TanStack Table, sorting, and pagin
 A prominent but not intrusive banner that appears at the top of the Talent Pool page.
 
 Design:
+
 - Uses the `Alert` component as a base but with custom styling
 - Background: `bg-warning/5` with `border-warning/30` left border (4px)
 - Icon: `AlertTriangle` in warning color
@@ -1617,6 +1692,7 @@ git commit -m "feat: add duplicate detection alert banner with savings highlight
 ### Task 23: Talent Pool Page Assembly
 
 **Files:**
+
 - Create: `src/components/talent-pool/talent-pool-page.tsx`
 - Modify: `src/App.tsx` — replace talent pool placeholder
 
@@ -1624,31 +1700,29 @@ git commit -m "feat: add duplicate detection alert banner with savings highlight
 
 ```tsx
 // src/components/talent-pool/talent-pool-page.tsx
-import { useState, useMemo } from "react";
-import { PageHeader } from "@/components/shared/page-header";
-import { CandidateSearch } from "./candidate-search";
-import { CandidateTable } from "./candidate-table";
-import { DuplicateAlert } from "./duplicate-alert";
-import { Button } from "@/components/ui/button";
-import { Upload, UserPlus } from "lucide-react";
-import { mockCandidates } from "@/lib/mocks/candidates";
+import { useState, useMemo } from 'react';
+import { PageHeader } from '@/components/shared/page-header';
+import { CandidateSearch } from './candidate-search';
+import { CandidateTable } from './candidate-table';
+import { DuplicateAlert } from './duplicate-alert';
+import { Button } from '@/components/ui/button';
+import { Upload, UserPlus } from 'lucide-react';
+import { mockCandidates } from '@/lib/mocks/candidates';
 
 export function TalentPoolPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeFilter, setActiveFilter] = useState('all');
 
   const filteredCandidates = useMemo(() => {
     let result = mockCandidates;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      result = result.filter(c =>
-        c.name.toLowerCase().includes(q) ||
-        c.role.toLowerCase().includes(q) ||
-        c.skills.some(s => s.toLowerCase().includes(q))
+      result = result.filter(
+        (c) => c.name.toLowerCase().includes(q) || c.role.toLowerCase().includes(q) || c.skills.some((s) => s.toLowerCase().includes(q)),
       );
     }
-    if (activeFilter === "high-score") result = result.filter(c => c.aiScore >= 80);
-    if (activeFilter === "duplicates") result = result.filter(c => c.isDuplicate);
+    if (activeFilter === 'high-score') result = result.filter((c) => c.aiScore >= 80);
+    if (activeFilter === 'duplicates') result = result.filter((c) => c.isDuplicate);
     return result;
   }, [searchQuery, activeFilter]);
 
@@ -1659,18 +1733,19 @@ export function TalentPoolPage() {
         description={`${mockCandidates.length} candidates in your database`}
         actions={
           <>
-            <Button variant="outline" size="sm"><Upload className="w-4 h-4 mr-2" />Import CVs</Button>
-            <Button size="sm"><UserPlus className="w-4 h-4 mr-2" />Add Candidate</Button>
+            <Button variant="outline" size="sm">
+              <Upload className="w-4 h-4 mr-2" />
+              Import CVs
+            </Button>
+            <Button size="sm">
+              <UserPlus className="w-4 h-4 mr-2" />
+              Add Candidate
+            </Button>
           </>
         }
       />
       <DuplicateAlert />
-      <CandidateSearch
-        query={searchQuery}
-        onQueryChange={setSearchQuery}
-        activeFilter={activeFilter}
-        onFilterChange={setActiveFilter}
-      />
+      <CandidateSearch query={searchQuery} onQueryChange={setSearchQuery} activeFilter={activeFilter} onFilterChange={setActiveFilter} />
       <CandidateTable candidates={filteredCandidates} />
     </div>
   );
@@ -1684,6 +1759,7 @@ Replace talent pool placeholder with `<TalentPoolPage />`.
 - [ ] **Step 3: Full verification**
 
 Verify:
+
 - Duplicate alert banner shows at top with savings figure
 - Search filters candidates in real-time
 - Filter chips toggle and update results
@@ -1706,6 +1782,7 @@ git commit -m "feat: assemble Talent Pool view with search, filters, and duplica
 ### Task 24: Jobs Table
 
 **Files:**
+
 - Create: `src/components/jobs/jobs-table.tsx`
 
 - [ ] **Step 1: Build the jobs table**
@@ -1713,6 +1790,7 @@ git commit -m "feat: assemble Talent Pool view with search, filters, and duplica
 A table listing all job openings. Simpler than the candidate table.
 
 Columns:
+
 1. **Job Title** — font-semibold, clickable (could open detail modal later)
 2. **Department** — muted text
 3. **Status** — colored badge: active=success, draft=secondary, closed=outline, paused=warning
@@ -1725,18 +1803,12 @@ Table styling: same patterns as candidate table (rounded container, hover rows, 
 
 Each row with entrance stagger animation.
 
-- [ ] **Step 2: Commit**
-
-```bash
-git add src/components/jobs/jobs-table.tsx
-git commit -m "feat: add jobs table with status badges and inline metrics"
-```
-
 ---
 
 ### Task 25: AI Job Description Writer Modal
 
 **Files:**
+
 - Create: `src/components/jobs/ai-jd-writer.tsx`
 
 - [ ] **Step 1: Build the AI JD writer**
@@ -1744,6 +1816,7 @@ git commit -m "feat: add jobs table with status badges and inline metrics"
 This is one of the key WOW features. It's a `Dialog` that simulates AI generating a job description.
 
 **Flow:**
+
 1. User clicks "Draft with AI" button → Dialog opens
 2. **Step 1:** Input field: "Describe the role in a few words..." with placeholder "e.g., Senior React developer for our fintech platform". Below: a few quick-select chips ("Engineering", "Product", "Design", "Sales", "Marketing")
 3. User types or selects, then clicks "Generate" button (primary, with Sparkles icon)
@@ -1775,12 +1848,14 @@ git commit -m "feat: add AI JD writer modal with character-by-character typing e
 ### Task 26: Jobs Page Assembly
 
 **Files:**
+
 - Create: `src/components/jobs/jobs-page.tsx`
 - Modify: `src/App.tsx` — replace jobs placeholder
 
 - [ ] **Step 1: Compose the jobs page**
 
 Layout:
+
 - `PageHeader` with title "Job Openings", description "Manage your active and draft positions"
 - Actions: "Draft with AI ✨" button (primary, with Sparkles icon + ai-shimmer on the text), "Create Job" button (outline)
 - Stats row: 3 small cards — "Active: 5", "Draft: 2", "Total Candidates: 87" — similar to dashboard metrics but smaller
@@ -1809,6 +1884,7 @@ git commit -m "feat: assemble Jobs view with AI JD writer"
 ### Task 27: Agent Card
 
 **Files:**
+
 - Create: `src/components/ai-agents/agent-card.tsx`
 
 - [ ] **Step 1: Build the agent card**
@@ -1816,6 +1892,7 @@ git commit -m "feat: assemble Jobs view with AI JD writer"
 Each agent gets a card showing its status and controls.
 
 Card layout:
+
 - Top: icon (from lucide, based on agent's `icon` field) + agent name (font-semibold) + status badge
 - Description text (muted, small)
 - Stats row: "Processed today: **23**" | "Success rate: **96%**"
@@ -1841,6 +1918,7 @@ git commit -m "feat: add AI agent card with toggle and status indicators"
 ### Task 28: Activity Log
 
 **Files:**
+
 - Create: `src/components/ai-agents/activity-log.tsx`
 
 - [ ] **Step 1: Build the activity log**
@@ -1850,6 +1928,7 @@ A real-time-feeling feed of agent activities.
 Layout: a card with header "Recent Activity" and a scrollable list.
 
 Each activity item:
+
 - Small colored dot (success for completed, warning for in-progress, destructive for failed)
 - Agent name in bold (small)
 - Action description: "Enriched profile for **Alice Johnson**" or "Sent outreach email to **Bob Smith**"
@@ -1872,12 +1951,14 @@ git commit -m "feat: add agent activity log with real-time simulation"
 ### Task 29: AI Agents Page Assembly
 
 **Files:**
+
 - Create: `src/components/ai-agents/agents-page.tsx`
 - Modify: `src/App.tsx` — replace AI agents placeholder
 
 - [ ] **Step 1: Compose the agents page**
 
 Layout:
+
 - `PageHeader`: "AI Agents" with description "Your autonomous recruitment workforce"
 - Summary stats row: "6 Agents" | "4 Active" | "47 tasks processed today" — use small cards or inline badges
 - Agent cards in a grid: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4`
@@ -1907,6 +1988,7 @@ git commit -m "feat: assemble AI Agents command center with real-time activity"
 ### Task 30: Reports Page
 
 **Files:**
+
 - Create: `src/components/reports/reports-page.tsx`
 - Modify: `src/App.tsx` — replace reports placeholder
 
@@ -1915,10 +1997,12 @@ git commit -m "feat: assemble AI Agents command center with real-time activity"
 A dashboard-style page with charts using `recharts`.
 
 Layout:
+
 - `PageHeader`: "Reports" with description "Recruitment performance analytics"
 - Actions: date range selector (mock — just 3 badges: "7 Days", "30 Days", "90 Days" with toggle)
 
 Charts (in a grid `grid-cols-1 lg:grid-cols-2 gap-6`):
+
 1. **Hiring Funnel** — vertical bar chart showing candidates at each pipeline stage (New: 32, Screening: 24, Interview: 18, Offer: 8, Hired: 5). Use primary color with decreasing opacity for each stage.
 2. **Hires Over Time** — area chart showing hires per month (last 6 months). Smooth curve, gradient fill from primary to transparent.
 3. **Source Distribution** — pie/donut chart showing candidate sources (LinkedIn 40%, Referral 25%, Agency 20%, Direct 15%). Use chart-1 through chart-4 colors.
@@ -1950,6 +2034,7 @@ git commit -m "feat: add Reports view with hiring funnel, trends, and source cha
 ### Task 31: Dark Mode Toggle
 
 **Files:**
+
 - Modify: `src/components/layout/top-nav.tsx` — add dark mode toggle
 - Modify: `src/main.tsx` — add ThemeProvider
 
@@ -1958,16 +2043,16 @@ git commit -m "feat: add Reports view with hiring funnel, trends, and source cha
 Wrap the app in `ThemeProvider` from `next-themes`:
 
 ```tsx
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from 'next-themes';
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
       <TooltipProvider>
         <App />
       </TooltipProvider>
     </ThemeProvider>
-  </StrictMode>
+  </StrictMode>,
 );
 ```
 
@@ -1978,6 +2063,7 @@ In the right section of the top nav, add a `Sun`/`Moon` icon button that toggles
 - [ ] **Step 3: Verify dark mode**
 
 Toggle dark mode and verify:
+
 - Background switches to dark
 - All cards, text, borders adapt
 - AI shimmer/glow effects look good in dark mode
@@ -1996,6 +2082,7 @@ git commit -m "feat: add dark mode toggle with animated icon switch"
 ### Task 32: Toaster Setup & Interactive Feedback
 
 **Files:**
+
 - Modify: `src/App.tsx` — add Toaster
 - Modify various components to add toast notifications
 
@@ -2006,6 +2093,7 @@ Import and add `<Toaster />` from `@/components/ui/sonner` at the root level.
 - [ ] **Step 2: Add toast feedback to key interactions**
 
 Add `toast` calls (from `sonner`) to these interactions:
+
 - Pipeline: when a candidate is moved to a new stage → `toast.success("Alice moved to Interview stage")`
 - AI Agents: when an agent is toggled → `toast("Outreach Agent paused")` or `toast.success("Outreach Agent activated")`
 - Jobs: when "Use This Description" is clicked in JD writer → `toast.success("Job description saved")`
@@ -2027,11 +2115,13 @@ git commit -m "feat: add toast notifications for key user interactions"
 ### Task 33: Responsive Polish & Final QA
 
 **Files:**
+
 - Potentially modify various layout/component files
 
 - [ ] **Step 1: Mobile layout verification**
 
 Resize browser to 375px width (iPhone). Verify each page:
+
 - **Dashboard:** Single column layout, all sections stack, horizontal scroll on applications
 - **Pipeline:** Kanban scrolls horizontally, cards are readable
 - **Talent Pool:** Table scrolls horizontally or switches to card view
@@ -2044,6 +2134,7 @@ Fix any overflow issues, text truncation problems, or touch target sizes.
 - [ ] **Step 2: Animation performance check**
 
 Navigate rapidly between pages. Verify:
+
 - No animation jank or flicker
 - AnimatePresence transitions are smooth
 - No layout shifts during entrance animations
@@ -2052,6 +2143,7 @@ Navigate rapidly between pages. Verify:
 - [ ] **Step 3: Final visual consistency pass**
 
 Check:
+
 - All cards use consistent border-radius, padding, and shadow
 - All text follows the weight hierarchy (800/700/600/500/400/300)
 - AI elements consistently use the shimmer/glow effects
@@ -2114,6 +2206,7 @@ After Phase 2 (Layout Shell) is complete, the following phases can be built in p
 - **Phase 8** (Reports) — independent
 
 Each phase only depends on:
+
 1. The types from `src/types/index.ts` (Task 3)
 2. The mock data from `src/lib/mocks/` (Task 4)
 3. The shared components from `src/components/shared/` (Task 6)
@@ -2127,16 +2220,16 @@ Each page component is self-contained. **IMPORTANT:** When parallelizing, do NOT
 
 ## Summary
 
-| Phase | Tasks | Description |
-|-------|-------|-------------|
-| 1. Foundation | 1-4 | Dependencies, design system, types, mock data |
-| 2. Layout Shell | 5-10 | Navigation, sidebar, mobile nav, app shell |
-| 3. Dashboard | 11-16 | Welcome, metrics, priorities, recent apps, AI insights |
-| 4. Pipeline | 17-19 | Candidate cards, Kanban columns, drag-and-drop board |
-| 5. Talent Pool | 20-23 | Search, table, duplicate detection, page assembly |
-| 6. Jobs | 24-26 | Jobs table, AI JD writer with typing effect, page assembly |
-| 7. AI Agents | 27-29 | Agent cards, activity log, command center |
-| 8. Reports | 30 | Charts with recharts |
-| 9. Polish | 31-34 | Dark mode, toasts, responsive polish, build verification |
+| Phase           | Tasks | Description                                                |
+| --------------- | ----- | ---------------------------------------------------------- |
+| 1. Foundation   | 1-4   | Dependencies, design system, types, mock data              |
+| 2. Layout Shell | 5-10  | Navigation, sidebar, mobile nav, app shell                 |
+| 3. Dashboard    | 11-16 | Welcome, metrics, priorities, recent apps, AI insights     |
+| 4. Pipeline     | 17-19 | Candidate cards, Kanban columns, drag-and-drop board       |
+| 5. Talent Pool  | 20-23 | Search, table, duplicate detection, page assembly          |
+| 6. Jobs         | 24-26 | Jobs table, AI JD writer with typing effect, page assembly |
+| 7. AI Agents    | 27-29 | Agent cards, activity log, command center                  |
+| 8. Reports      | 30    | Charts with recharts                                       |
+| 9. Polish       | 31-34 | Dark mode, toasts, responsive polish, build verification   |
 
 **Total: 34 tasks across 9 phases**
