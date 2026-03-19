@@ -1,17 +1,13 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 interface AIShimmerProps {
   children: React.ReactNode;
   className?: string;
-  as?: "span" | "div" | "p";
+  as?: 'span' | 'div' | 'p';
 }
 
-export function AIShimmer({ children, className, as: Tag = "span" }: AIShimmerProps) {
-  return (
-    <Tag className={cn("ai-shimmer font-semibold", className)}>
-      {children}
-    </Tag>
-  );
+export function AIShimmer({ children, className, as: Tag = 'span' }: AIShimmerProps) {
+  return <Tag className={cn('ai-shimmer font-semibold', className)}>{children}</Tag>;
 }
 
 interface AIGlowCardProps {
@@ -20,9 +16,5 @@ interface AIGlowCardProps {
 }
 
 export function AIGlowCard({ children, className }: AIGlowCardProps) {
-  return (
-    <div className={cn("ai-glow-border rounded-xl", className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn('ai-glow-border rounded-xl', className)}>{children}</div>;
 }

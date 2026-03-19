@@ -1,219 +1,115 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code working in this repository.
 
-## Project Overview
+## Project
 
-**Triolla Talent OS** is a high-fidelity interactive frontend prototype for an agentic HR/recruitment platform designed for lean teams with a single recruiter. This prototype uses only mocked data and focuses on visual validation of the UI/UX before backend implementation.
+**Triolla Talent OS** — frontend-only interactive prototype for an agentic HR/recruitment platform. No backend, no API calls — all data is mocked.
 
-### Scope & Constraints
-- **Frontend-only prototype** with no backend integration
-- **Mock data only** — all data is hardcoded or generated in component state
-- **Visual design focus** — the prototype should look and feel exactly like the final production product
-- **Non-technical users in mind** — the UI must be intuitive for recruiters without technical background
+### Hard Constraints
 
-## Architecture & Directory Structure
+- Mock data only (hardcoded or component state)
+- No video screening — text + voice modalities only
+- AI-first UX: natural language inputs, AI suggestions throughout
+- Non-technical friendly: plain English, intuitive workflows
+- Duplicate detection: flag candidates from agencies who already exist in the DB
+
+## Commands
+
+```bash
+npm run dev      # Dev server → http://localhost:5173
+npm run build    # Type-check + production build
+npm run lint     # ESLint
+# No test suite — this is a prototype
+```
+
+## Tech Stack
+
+| Tool                   | Version | Notes                              |
+| ---------------------- | ------- | ---------------------------------- |
+| React                  | 19.2    | Concurrent features                |
+| TypeScript             | 5.9     | Strict mode                        |
+| Tailwind CSS           | 4.2     | via @tailwindcss/vite              |
+| Vite                   | 8       |                                    |
+| shadcn/ui              | —       | Components in `src/components/ui/` |
+| lucide-react           | —       | All icons (`w-4 h-4` default size) |
+| recharts               | —       | Charts                             |
+| @tanstack/react-table  | —       | Data grids                         |
+| next-themes            | —       | Dark mode                          |
+| motion (framer-motion) | —       | Animations — use `motion` import   |
+
+## Directory Structure
 
 ```
 src/
 ├── components/
-│   ├── ui/              # shadcn/ui components (pre-built, reusable)
-│   ├── layout/          # Layout components (navigation, sidebars, headers)
-│   ├── dashboard/       # Dashboard-specific components
-│   ├── pipeline/        # Pipeline/Kanban related components
-│   ├── talent-pool/     # Talent pool search/duplicate detection components
-│   ├── jobs/            # Job openings & AI JD writer components
-│   └── ai-agents/       # AI agents control center components
+│   ├── ui/           # shadcn/ui (don't modify)
+│   ├── layout/       # Top nav, sidebar, responsive shell
+│   ├── dashboard/
+│   ├── pipeline/
+│   ├── talent-pool/
+│   ├── jobs/
+│   ├── ai-agents/
+│   └── reports/
 ├── lib/
-│   ├── utils.ts         # Shared utility functions
-│   └── mocks/           # Mock data generators and fixtures
-├── types/               # TypeScript type definitions
-├── App.tsx              # Main app component with routing
-└── main.tsx             # React DOM entry point
+│   ├── utils.ts
+│   └── mocks/        # One file per domain (candidates.ts, jobs.ts, agents.ts)
+├── types/
+├── App.tsx           # Routing
+└── main.tsx
 ```
 
-## Core Features & Views
+## Design Direction
 
-Based on the PRD, the app has these main sections:
+**Aesthetic:** "Refined Productivity" — Linear's precision + Notion's warmth + Apple's polish. Clean layouts with moments of delight.
 
-1. **Dashboard** — The operational hub with:
-   - Welcome card with personalized greeting
-   - Key metrics (active roles, candidates in pipeline, hires, AI confidence)
-   - Today's priorities (actionable AI suggestions)
-   - Recent applications (scrollable/table view)
-   - AI insights panel
+**Typography:** Plus Jakarta Sans (variable, 200–800). Weight hierarchy: 800 page titles → 700 section headings → 600 card titles → 500 body emphasis → 400 body → 300 muted.
 
-2. **Pipeline** — Drag-and-drop Kanban board with columns:
-   - New → Screening → Interview → Offer → Hired/Rejected
-   - Candidate cards showing basic info and AI match scores
+**Color palette (oklch, Tailwind CSS 4):**
 
-3. **Talent Pool** — Search interface with:
-   - Large candidate database simulation
-   - Duplicate detection alerts (visual mockups showing duplicates)
-   - Integration fee savings messaging
+- Background: warm off-white `oklch(0.985 0.002 90)` — NOT pure white
+- Cards: `oklch(1 0 0)` — pure white for contrast
+- Primary: rich indigo `oklch(0.55 0.25 275)`
+- AI accent: warm amber `oklch(0.78 0.16 75)` → coral `oklch(0.72 0.18 40)` gradient
 
-4. **Job Openings** — Table view with:
-   - Active and drafted positions
-   - "Draft with AI" modal flow
-   - Simulated AI typing effect for generated job descriptions
+**AI visual language:** Amber/coral shimmer on AI text (`ai-shimmer` CSS class), animated gradient borders on AI panels (`ai-glow-border`), subtle warm glow on AI cards.
 
-5. **AI Agents** — Control center showing:
-   - Backend agent toggles (mock controls)
-   - Activity logs and status indicators
-   - Processing state mockups
+**Animations (`motion` from `motion/react`):**
 
-## Critical PRD Principles
+- Entrance: `opacity: 0, y: 20` → `opacity: 1, y: 0`, duration 0.5s, ease `[0.25, 0.46, 0.45, 0.94]`
+- Stagger children: `staggerChildren: 0.08`
+- Hover lift: `whileHover={{ y: -2 }}`
+- Page transitions: `AnimatePresence mode="wait"` with fade + subtle slide
 
-When building any view, keep these principles in mind:
+**Key WOW moments:** animated number counters on metrics · AI shimmer on AI elements · staggered card entrances · Kanban drag with rotation tilt · AI JD writer typing effect · sliding sidebar active indicator · glass-morphism AI panels · duplicate detection slide-in alert
 
-- ✅ **No video screening** — all screening must show text + voice modalities only
-- ✅ **500 CVs/month scale** — UI should appear capable of handling this volume
-- ✅ **AI-first UX** — natural language inputs, AI suggestions throughout
-- ✅ **Non-technical friendly** — plain English, intuitive workflows
-- ✅ **Duplicate detection ROI** — clearly show how duplicates are flagged to save sourcing fees
-- ✅ **Agentic workflows** — visual indication that AI is handling things autonomously
+## Navigation (all screens)
 
-## Global Navigation & Layout
+**Top bar:** Logo | Global search (natural language) | Ask AI ✨ | Bell 🔔 | Avatar
+**Left sidebar:** Dashboard · Pipeline · Talent Pool · Job Openings · AI Agents · Reports
+**Mobile:** sidebar collapses to bottom nav bar (`hidden md:block` / `md:hidden`)
 
-### Top Navigation Bar (persistent across all screens)
-- **Left**: Triolla logo
-- **Center**: Global search bar (natural language, e.g., "Find developers with React experience")
-- **Right**: "Ask AI" ✨ button, notification bell 🔔, recruiter avatar 👤
+## Styling Rules
 
-### Left Sidebar (main menu)
-- 🏠 Dashboard
-- 🔄 Pipeline
-- 🏊 Talent Pool
-- 💼 Job Openings
-- 🤖 AI Agents
-- 📊 Reports
+- Tailwind utility classes only — no inline styles, no CSS files
+- Dark mode: `dark:` prefix classes (via next-themes)
+- Responsive: `sm:` `md:` `lg:` `xl:` breakpoints
+- Use shadcn/ui components as base; compose, don't rewrite
 
-### Mobile Responsiveness
-On mobile devices, the left sidebar collapses into a **bottom navigation bar** with large, touch-friendly buttons. Use Tailwind responsive classes (`hidden md:block`, `md:hidden`, etc.) to toggle between desktop and mobile layouts.
+## Import Alias
 
-## Technology Stack & Setup
-
-- **React 19.2** — Latest React with concurrent features
-- **TypeScript 5.9** — Strict mode enabled
-- **Tailwind CSS 4.2** — Utility-first CSS framework with @tailwindcss/vite
-- **Vite 8** — Fast build tool and dev server
-- **shadcn/ui** — Pre-built, accessible components (button, card, dialog, etc.)
-- **@tanstack/react-table** — Headless table library for data grids
-- **recharts** — Composable React charting library
-- **lucide-react** — Icon library
-- **next-themes** — Dark mode support
-
-## Component & UI Guidelines
-
-### shadcn/ui Components
-Shadcn/ui components are already installed in `src/components/ui/`. When building views:
-
-- Use existing shadcn components (Button, Card, Dialog, Input, etc.) for consistency
-- Extend or compose shadcn components rather than creating custom versions
-- All components support Tailwind CSS class customization via the `className` prop
-
-### Styling Approach
-- **Tailwind CSS utility classes** for all styling (no inline styles or CSS files)
-- **Dark mode support** via `next-themes` — use `dark:` prefixes for dark mode classes
-- **Responsive design** with `sm:`, `md:`, `lg:`, `xl:` breakpoints
-- **Consistent spacing** — use Tailwind's spacing scale (4px unit)
-
-### Icons
-- Use **lucide-react** for all icons (e.g., `<BarChart3 className="w-4 h-4" />`)
-- Keep icon sizes small (typically `w-4 h-4` or `w-5 h-5`)
-
-## Mock Data Strategy
-
-- Create mock data in **`src/lib/mocks/`** — separate files for each domain (candidates, jobs, agents)
-- Use consistent mock data across components for a cohesive prototype experience
-- Mock API responses should feel realistic (include timestamps, realistic text, proper counts)
-- All data is **hardcoded or derived from initial state** — no actual API calls
-
-Example structure:
-```typescript
-// src/lib/mocks/candidates.ts
-export const mockCandidates = [
-  {
-    id: '1',
-    name: 'Alice Johnson',
-    role: 'Senior PM',
-    aiScore: 92,
-    // ...
-  },
-  // ...
-];
-```
-
-## Development Commands
-
-```bash
-# Start dev server (http://localhost:5173)
-npm run dev
-
-# Type check and build for production
-npm run build
-
-# Run ESLint
-npm run lint
-
-# Preview production build locally
-npm run preview
-```
-
-## Code Style & Best Practices
-
-- **Strict TypeScript** — all components should be typed, no `any` unless unavoidable
-- **React best practices** — use hooks (useState, useEffect, useCallback), avoid class components
-- **Accessible components** — all interactive elements must be keyboard accessible, use semantic HTML
-- **Performance** — use React.memo for expensive components, avoid unnecessary re-renders
-- **Component composition** — prefer small, focused components over monolithic views
-- **Naming conventions**:
-  - Components: PascalCase (e.g., `DashboardView`)
-  - Files: kebab-case for component files (e.g., `dashboard-view.tsx`)
-  - Types: PascalCase (e.g., `Candidate`, `Job`)
-  - Mock functions: prefixed with `mock` (e.g., `mockCandidates()`)
-
-## Testing & Linting
-
-- ESLint is configured with React and TypeScript rules
-- Run `npm run lint` before committing code
-- Fix linting issues automatically where possible (`eslint --fix`)
-- Focus on visual testing in the prototype phase — manually verify UI matches PRD
-
-## Import Aliases
-
-Use the `@/` alias for imports from `src/`:
 ```typescript
 import { Button } from '@/components/ui/button';
 import { mockCandidates } from '@/lib/mocks/candidates';
 ```
 
-## Key Implementation Notes
+## Naming Conventions
 
-1. **Start with layout components** — build the top nav, sidebar, and responsive layout first
-2. **Dashboard is the entry point** — implement the dashboard view with all sections
-3. **Use component composition** — break down large views into smaller, reusable components
-4. **Mock all data** — don't leave blank placeholders; populate with realistic mock data
-5. **Handle responsive design early** — don't build desktop-first and add mobile later
-6. **Visual consistency** — refer to the PRD for exact wording, tone, and visual hierarchy
+- Components: `PascalCase`
+- Files: `kebab-case.tsx`
+- Types: `PascalCase`
+- Mock exports: `mockX` or `MOCK_X`
 
-## Common Workflows
+## Mock Data
 
-### Adding a New Page
-1. Create component file in appropriate subdirectory (e.g., `src/components/jobs/jobs-page.tsx`)
-2. Add mock data to `src/lib/mocks/` if needed
-3. Import and add to App.tsx routing
-4. Ensure responsive design works on mobile
-
-### Adding a New Modal/Dialog
-1. Use shadcn/ui `Dialog` component as base
-2. Import and compose in the parent component
-3. Use state (useState) to control open/close
-4. Handle mock data updates in state (not real API)
-
-### Testing a View
-1. Run `npm run dev`
-2. Navigate to the view in browser
-3. Test on mobile using browser dev tools (`Cmd+Shift+M` on Mac)
-4. Check dark mode toggle works (if implemented)
-5. Verify all interactive elements work and feel natural
+Keep mock data in `src/lib/mocks/` with realistic timestamps, scores, and text. Populate all UI — no empty placeholders.

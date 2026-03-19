@@ -32,10 +32,7 @@ export function JobsPage() {
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
-        (j) =>
-          j.title.toLowerCase().includes(q) ||
-          j.department.toLowerCase().includes(q) ||
-          j.hiringManager.toLowerCase().includes(q)
+        (j) => j.title.toLowerCase().includes(q) || j.department.toLowerCase().includes(q) || j.hiringManager.toLowerCase().includes(q),
       );
     }
     if (activeFilter !== 'all') {
@@ -85,12 +82,7 @@ export function JobsPage() {
       </motion.div>
 
       <motion.div variants={fadeUp}>
-        <JobsSearch
-          query={searchQuery}
-          onQueryChange={setSearchQuery}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-        />
+        <JobsSearch query={searchQuery} onQueryChange={setSearchQuery} activeFilter={activeFilter} onFilterChange={setActiveFilter} />
       </motion.div>
 
       <motion.div variants={fadeUp}>

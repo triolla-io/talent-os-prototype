@@ -5,6 +5,8 @@ import { DashboardPage } from '@/components/dashboard/dashboard-page';
 import { PipelinePage } from '@/components/pipeline/pipeline-page';
 import { TalentPoolPage } from '@/components/talent-pool/talent-pool-page';
 import { JobsPage } from '@/components/jobs/jobs-page';
+import { AgentsPage } from '@/components/ai-agents/agents-page';
+import { ReportsPage } from '@/components/reports/reports-page';
 
 function App() {
   const { activePage, navigate } = useActivePage();
@@ -23,8 +25,8 @@ function App() {
           {activePage === 'pipeline' && <PipelinePage />}
           {activePage === 'talent-pool' && <TalentPoolPage />}
           {activePage === 'jobs' && <JobsPage />}
-          {activePage === 'ai-agents' && <div className="text-muted-foreground text-sm">AI Agents — coming soon</div>}
-          {activePage === 'reports' && <div className="text-muted-foreground text-sm">Reports — coming soon</div>}
+          {activePage === 'ai-agents' && <AgentsPage />}
+          {activePage === 'reports' && <ReportsPage />}
         </motion.div>
       </AnimatePresence>
     </AppLayout>

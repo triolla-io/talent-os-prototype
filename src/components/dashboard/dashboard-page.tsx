@@ -1,9 +1,9 @@
-import { motion } from "motion/react";
-import { WelcomeCard } from "./welcome-card";
-import { MetricsRow } from "./metrics-row";
-import { PrioritiesList } from "./priorities-list";
-import { RecentApplications } from "./recent-applications";
-import { AIInsightsPanel } from "./ai-insights-panel";
+import { motion } from 'motion/react';
+import { WelcomeCard } from './welcome-card';
+import { MetricsRow } from './metrics-row';
+import { PrioritiesList } from './priorities-list';
+import { RecentApplications } from './recent-applications';
+import { AIInsightsPanel } from './ai-insights-panel';
 
 const stagger = {
   animate: { transition: { staggerChildren: 0.1 } },
@@ -20,12 +20,7 @@ const fadeUp = {
 
 export function DashboardPage() {
   return (
-    <motion.div
-      variants={stagger}
-      initial="initial"
-      animate="animate"
-      className="space-y-6"
-    >
+    <motion.div variants={stagger} initial="initial" animate="animate" className="space-y-6">
       <motion.div variants={fadeUp}>
         <WelcomeCard />
       </motion.div>

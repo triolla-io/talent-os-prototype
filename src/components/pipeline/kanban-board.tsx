@@ -1,33 +1,21 @@
-import { useState } from "react";
-import {
-  DndContext,
-  DragOverlay,
-  closestCorners,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
-import type {
-  DragStartEvent,
-  DragOverEvent,
-  DragEndEvent,
-} from "@dnd-kit/core";
-import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { type Candidate, type PipelineStage } from "@/types";
-import { mockCandidates } from "@/lib/mocks/candidates";
-import { KanbanColumn } from "./kanban-column";
-import { CandidateCard } from "./candidate-card";
-import { createPortal } from "react-dom";
+import { useState } from 'react';
+import { DndContext, DragOverlay, closestCorners, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import type { DragStartEvent, DragOverEvent, DragEndEvent } from '@dnd-kit/core';
+import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import { type Candidate, type PipelineStage } from '@/types';
+import { mockCandidates } from '@/lib/mocks/candidates';
+import { KanbanColumn } from './kanban-column';
+import { CandidateCard } from './candidate-card';
+import { createPortal } from 'react-dom';
 
 // Let's use 6 columns as requested by the 6 mock statuses effectively.
 const ALL_STAGES: { id: PipelineStage; title: string }[] = [
-  { id: "new", title: "New" },
-  { id: "screening", title: "Screening" },
-  { id: "interview", title: "Interview" },
-  { id: "offer", title: "Offer" },
-  { id: "hired", title: "Hired" },
-  { id: "rejected", title: "Rejected" },
+  { id: 'new', title: 'New' },
+  { id: 'screening', title: 'Screening' },
+  { id: 'interview', title: 'Interview' },
+  { id: 'offer', title: 'Offer' },
+  { id: 'hired', title: 'Hired' },
+  { id: 'rejected', title: 'Rejected' },
 ];
 
 export function KanbanBoard() {
@@ -42,7 +30,7 @@ export function KanbanBoard() {
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   const handleDragStart = (event: DragStartEvent) => {
@@ -58,9 +46,9 @@ export function KanbanBoard() {
 
     if (activeId === overId) return;
 
-    const isActiveCandidate = active.data.current?.type === "Candidate";
-    const isOverCandidate = over.data.current?.type === "Candidate";
-    const isOverColumn = over.data.current?.type === "Column";
+    const isActiveCandidate = active.data.current?.type === 'Candidate';
+    const isOverCandidate = over.data.current?.type === 'Candidate';
+    const isOverColumn = over.data.current?.type === 'Column';
 
     if (!isActiveCandidate) return;
 
@@ -103,8 +91,8 @@ export function KanbanBoard() {
 
     if (activeId === overId) return;
 
-    const isActiveCandidate = active.data.current?.type === "Candidate";
-    const isOverCandidate = over.data.current?.type === "Candidate";
+    const isActiveCandidate = active.data.current?.type === 'Candidate';
+    const isOverCandidate = over.data.current?.type === 'Candidate';
 
     if (isActiveCandidate && isOverCandidate) {
       setCandidates((candidates) => {
@@ -137,12 +125,10 @@ export function KanbanBoard() {
           ))}
         </div>
 
-        {typeof window !== "undefined" &&
+        {typeof window !== 'undefined' &&
           createPortal(
-            <DragOverlay>
-              {activeCandidate ? <CandidateCard candidate={activeCandidate} isOverlay /> : null}
-            </DragOverlay>,
-            document.body
+            <DragOverlay>{activeCandidate ? <CandidateCard candidate={activeCandidate} isOverlay /> : null}</DragOverlay>,
+            document.body,
           )}
       </DndContext>
     </div>

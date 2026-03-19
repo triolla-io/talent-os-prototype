@@ -7,7 +7,7 @@ import {
   flexRender,
   createColumnHelper,
   type SortingState,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 import { motion } from 'motion/react';
 import { ChevronUp, ChevronDown, ChevronsUpDown, MoreHorizontal, BarChart2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -57,8 +57,8 @@ function getRelativeDate(postedDate: string) {
 const columnHelper = createColumnHelper<Job>();
 
 const columns = [
-  columnHelper.accessor("title", {
-    header: "Job Title",
+  columnHelper.accessor('title', {
+    header: 'Job Title',
     cell: ({ getValue }) => (
       <span className="font-semibold cursor-pointer hover:underline decoration-muted-foreground underline-offset-4 whitespace-nowrap">
         {getValue()}
@@ -66,20 +66,18 @@ const columns = [
     ),
   }),
 
-  columnHelper.accessor("department", {
-    header: "Department",
-    cell: ({ getValue }) => (
-      <span className="text-muted-foreground whitespace-nowrap">{getValue()}</span>
-    ),
+  columnHelper.accessor('department', {
+    header: 'Department',
+    cell: ({ getValue }) => <span className="text-muted-foreground whitespace-nowrap">{getValue()}</span>,
   }),
 
-  columnHelper.accessor("status", {
-    header: "Status",
+  columnHelper.accessor('status', {
+    header: 'Status',
     cell: ({ getValue }) => <StatusBadge status={getValue()} />,
   }),
 
-  columnHelper.accessor("candidateCount", {
-    header: "Candidates",
+  columnHelper.accessor('candidateCount', {
+    header: 'Candidates',
     cell: ({ getValue }) => {
       const count = getValue();
       return (
@@ -91,23 +89,19 @@ const columns = [
     },
   }),
 
-  columnHelper.accessor("postedDate", {
-    header: "Posted",
-    cell: ({ getValue }) => (
-      <span className="text-muted-foreground whitespace-nowrap">{getRelativeDate(getValue())}</span>
-    ),
+  columnHelper.accessor('postedDate', {
+    header: 'Posted',
+    cell: ({ getValue }) => <span className="text-muted-foreground whitespace-nowrap">{getRelativeDate(getValue())}</span>,
   }),
 
-  columnHelper.accessor("hiringManager", {
-    header: "Hiring Manager",
-    cell: ({ getValue }) => (
-      <span className="text-foreground whitespace-nowrap">{getValue()}</span>
-    ),
+  columnHelper.accessor('hiringManager', {
+    header: 'Hiring Manager',
+    cell: ({ getValue }) => <span className="text-foreground whitespace-nowrap">{getValue()}</span>,
   }),
 
   columnHelper.display({
-    id: "actions",
-    header: "Actions",
+    id: 'actions',
+    header: 'Actions',
     cell: ({ row }) => {
       const job = row.original;
       return (
@@ -129,15 +123,9 @@ const columns = [
               align="end"
               className="w-48 rounded-xl border border-border/50 bg-background/95 backdrop-blur-md shadow-xl ring-0 p-1.5"
             >
-              <DropdownMenuItem className="rounded-lg cursor-pointer hover:bg-muted font-medium py-1.5">
-                View Details
-              </DropdownMenuItem>
-              <DropdownMenuItem className="rounded-lg cursor-pointer hover:bg-muted font-medium py-1.5">
-                Edit Job
-              </DropdownMenuItem>
-              <DropdownMenuItem className="rounded-lg cursor-pointer hover:bg-muted font-medium py-1.5">
-                Duplicate
-              </DropdownMenuItem>
+              <DropdownMenuItem className="rounded-lg cursor-pointer hover:bg-muted font-medium py-1.5">View Details</DropdownMenuItem>
+              <DropdownMenuItem className="rounded-lg cursor-pointer hover:bg-muted font-medium py-1.5">Edit Job</DropdownMenuItem>
+              <DropdownMenuItem className="rounded-lg cursor-pointer hover:bg-muted font-medium py-1.5">Duplicate</DropdownMenuItem>
               <DropdownMenuSeparator className="bg-border/50 my-1" />
               <DropdownMenuItem className="text-warning rounded-lg cursor-pointer hover:bg-warning/10 focus:bg-warning/10 focus:text-warning font-medium py-1.5">
                 Pause Recruiting
@@ -197,22 +185,20 @@ export function JobsTable({ jobs }: JobsTableProps) {
                     <th
                       key={header.id}
                       className={cn(
-                        "px-4 py-3 text-left text-xs uppercase tracking-wide text-muted-foreground font-semibold whitespace-nowrap",
-                        canSort && "cursor-pointer select-none hover:text-foreground transition-colors",
-                        header.id === 'actions' && "text-right"
+                        'px-4 py-3 text-left text-xs uppercase tracking-wide text-muted-foreground font-semibold whitespace-nowrap',
+                        canSort && 'cursor-pointer select-none hover:text-foreground transition-colors',
+                        header.id === 'actions' && 'text-right',
                       )}
                       style={{ width: header.getSize() !== 150 ? header.getSize() : undefined }}
                       onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
                     >
-                      <div className={cn("flex items-center gap-1", header.id === 'actions' && "justify-end")}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(header.column.columnDef.header, header.getContext())}
+                      <div className={cn('flex items-center gap-1', header.id === 'actions' && 'justify-end')}>
+                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                         {canSort && (
                           <span className="ml-0.5 opacity-60">
-                            {sortDir === "asc" ? (
+                            {sortDir === 'asc' ? (
                               <ChevronUp className="w-3 h-3" />
-                            ) : sortDir === "desc" ? (
+                            ) : sortDir === 'desc' ? (
                               <ChevronDown className="w-3 h-3" />
                             ) : (
                               <ChevronsUpDown className="w-3 h-3" />
@@ -238,10 +224,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.03 }}
-                  className={cn(
-                    "border-b last:border-b-0 hover:bg-muted/40 transition-colors",
-                    isEven ? "bg-background" : "bg-muted/20"
-                  )}
+                  className={cn('border-b last:border-b-0 hover:bg-muted/40 transition-colors', isEven ? 'bg-background' : 'bg-muted/20')}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className="px-4 py-3 align-middle">
@@ -254,10 +237,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
 
             {table.getRowModel().rows.length === 0 && (
               <tr>
-                <td
-                  colSpan={columns.length}
-                  className="px-4 py-12 text-center text-muted-foreground text-sm"
-                >
+                <td colSpan={columns.length} className="px-4 py-12 text-center text-muted-foreground text-sm">
                   No job openings found.
                 </td>
               </tr>
@@ -269,37 +249,25 @@ export function JobsTable({ jobs }: JobsTableProps) {
       {/* Pagination */}
       <div className="flex items-center justify-between px-1">
         <p className="text-sm text-muted-foreground">
-          Showing{" "}
+          Showing{' '}
           <span className="font-medium text-foreground">
             {totalRows === 0 ? 0 : pageIndex * pageSize + 1}–{Math.min((pageIndex + 1) * pageSize, totalRows)}
-          </span>{" "}
+          </span>{' '}
           of <span className="font-medium text-foreground">{totalRows}</span> jobs
         </p>
 
         <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
+          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
             <ChevronLeft className="w-4 h-4" />
             Previous
           </Button>
 
           <span className="text-sm text-muted-foreground px-1">
-            Page{" "}
-            <span className="font-medium text-foreground">{pageCount === 0 ? 0 : pageIndex + 1}</span>{" "}
-            of{" "}
+            Page <span className="font-medium text-foreground">{pageCount === 0 ? 0 : pageIndex + 1}</span> of{' '}
             <span className="font-medium text-foreground">{pageCount}</span>
           </span>
 
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
+          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
             Next
             <ChevronRight className="w-4 h-4" />
           </Button>
