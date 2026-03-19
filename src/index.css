@@ -242,6 +242,7 @@ body {
 
 .ai-glow-border {
   position: relative;
+  isolation: isolate;
 }
 .ai-glow-border::before {
   content: '';
