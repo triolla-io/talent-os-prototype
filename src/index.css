@@ -241,27 +241,10 @@ body {
 }
 
 .ai-glow-border {
-  position: relative;
-  isolation: isolate;
-}
-.ai-glow-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1.5px;
   background: linear-gradient(135deg, oklch(0.78 0.16 75), oklch(0.72 0.18 40), oklch(0.78 0.16 75));
   background-size: 200% 200%;
   animation: gradient-border 4s ease infinite;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  pointer-events: none;
+  padding: 1.5px;
 }
 
 .typing-cursor::after {

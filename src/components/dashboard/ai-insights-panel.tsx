@@ -30,7 +30,7 @@ export function AIInsightsPanel() {
       className="rounded-xl h-full"
     >
       <div className="ai-glow-border rounded-xl h-full">
-        <div className="bg-linear-to-br from-ai-amber/3 to-ai-coral/3 rounded-xl p-5 h-full flex flex-col">
+        <div className="bg-card bg-linear-to-br from-ai-amber/3 to-ai-coral/3 rounded-xl p-5 h-full flex flex-col">
           {/* Header */}
           <div className="flex items-center gap-2 mb-4">
             <div className="w-7 h-7 rounded-lg bg-linear-to-br from-ai-amber to-ai-coral flex items-center justify-center shrink-0">

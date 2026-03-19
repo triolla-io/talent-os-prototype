@@ -16,5 +16,9 @@ interface AIGlowCardProps {
 }
 
 export function AIGlowCard({ children, className }: AIGlowCardProps) {
-  return <div className={cn('ai-glow-border rounded-xl', className)}>{children}</div>
+  return (
+    <div className={cn('ai-glow-border rounded-xl', className)}>
+      <div className="bg-card rounded-xl h-full">{children}</div>
+    </div>
+  )
 }
