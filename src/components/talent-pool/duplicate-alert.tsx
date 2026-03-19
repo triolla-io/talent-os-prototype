@@ -7,11 +7,9 @@ import { AIShimmer } from '@/components/shared/ai-shimmer';
 export function DuplicateAlert() {
   const [isVisible, setIsVisible] = useState(true);
 
-  if (!isVisible) return null;
-
   return (
     <AnimatePresence>
-      <motion.div
+      {isVisible && <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
@@ -42,7 +40,7 @@ export function DuplicateAlert() {
         >
           <X className="w-4 h-4 text-warning" />
         </button>
-      </motion.div>
+      </motion.div>}
     </AnimatePresence>
   );
 }

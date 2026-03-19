@@ -151,7 +151,8 @@ export function ReportsPage() {
           </div>
 
           {/* Date range toggle */}
-          <div className="flex items-center gap-1 bg-muted/60 rounded-lg p-1 self-start">
+          <div className="flex flex-col items-end gap-1.5 self-start">
+          <div className="flex items-center gap-1 bg-muted/60 rounded-lg p-1">
             {RANGE_OPTIONS.map((range) => (
               <button
                 key={range}
@@ -172,6 +173,8 @@ export function ReportsPage() {
                 {range}
               </button>
             ))}
+          </div>
+          <p className="text-[10px] text-muted-foreground/60">Live filtering coming soon</p>
           </div>
         </div>
       </motion.div>

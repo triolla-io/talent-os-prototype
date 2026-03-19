@@ -6,9 +6,9 @@ import { DuplicateAlert } from './duplicate-alert';
 import { Button } from '@/components/ui/button';
 import { Upload, UserPlus } from 'lucide-react';
 import { mockCandidates } from '@/lib/mocks/candidates';
-import { motion } from 'motion/react';
+import { motion, type Variants } from 'motion/react';
 
-const stagger: any = {
+const stagger: Variants = {
   initial: { opacity: 0 },
   animate: {
     opacity: 1,
@@ -18,7 +18,7 @@ const stagger: any = {
   },
 };
 
-const fadeUp: any = {
+const fadeUp: Variants = {
   initial: { opacity: 0, y: 15 },
   animate: {
     opacity: 1,
@@ -30,7 +30,7 @@ const fadeUp: any = {
 export function TalentPoolPage() {
   const [searchQuery, setSearchQuery] = useState('');
   // "all" | "high-score" | "available" | "referred" | "duplicates"
-  const [activeFilter, setActiveFilter] = useState<any>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'high-score' | 'available' | 'referred' | 'duplicates'>('all');
 
   const filteredCandidates = useMemo(() => {
     let result = mockCandidates;

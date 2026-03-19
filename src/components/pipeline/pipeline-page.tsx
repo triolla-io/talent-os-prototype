@@ -7,7 +7,7 @@ export function PipelinePage() {
   return (
     <div className="flex h-full flex-col">
       <PageHeader
-        title="Pipeline"
+        title="Product Manager"
         description="Drag candidates between stages to update their status"
         actions={
           <>

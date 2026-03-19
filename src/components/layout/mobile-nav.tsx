@@ -1,14 +1,15 @@
 import { motion } from 'motion/react';
-import { LayoutDashboard, Kanban, Users, Briefcase, Bot } from 'lucide-react';
+import { LayoutDashboard, Kanban, Users, Briefcase, Bot, BarChart3 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { PageId } from '@/types';
 
 const MOBILE_NAV_ITEMS = [
-  { id: 'dashboard' as PageId, label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'dashboard' as PageId, label: 'Home', icon: LayoutDashboard },
   { id: 'pipeline' as PageId, label: 'Pipeline', icon: Kanban },
-  { id: 'talent-pool' as PageId, label: 'Talent Pool', icon: Users },
+  { id: 'talent-pool' as PageId, label: 'Talent', icon: Users },
   { id: 'jobs' as PageId, label: 'Jobs', icon: Briefcase },
-  { id: 'ai-agents' as PageId, label: 'AI Agents', icon: Bot },
+  { id: 'ai-agents' as PageId, label: 'Agents', icon: Bot },
+  { id: 'reports' as PageId, label: 'Reports', icon: BarChart3 },
 ];
 
 interface MobileNavProps {

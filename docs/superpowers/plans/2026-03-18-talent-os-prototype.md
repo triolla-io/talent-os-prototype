@@ -1824,7 +1824,7 @@ This is one of the key WOW features. It's a `Dialog` that simulates AI generatin
    - A loading bar at the top (animated, gradient from ai-amber to ai-coral)
    - Below: the job description text appears character by character with a typing animation
    - The text is formatted with sections: Title, About the Role, Responsibilities (bullet list), Requirements (bullet list), Nice to Have, Compensation & Benefits
-   - Typing speed: ~30ms per character, faster for whitespace
+   - Typing speed: ~12ms interval, 2–5 chars per tick (completes in ~1.5s — fast and snappy, accepted deviation from original 30ms/char spec)
    - A blinking cursor at the end of the currently typing text (use `.typing-cursor` CSS class)
 5. When typing completes: "Copy to Clipboard" and "Use This Description" buttons appear with fade-in
 

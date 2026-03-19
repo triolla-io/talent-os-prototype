@@ -51,12 +51,6 @@ export function KanbanColumn({ stage, title, candidates }: KanbanColumnProps) {
             </Badge>
           </div>
         </div>
-        {/* PRD Constraint: Screening MUST have "Text + Voice" badge */}
-        {/* {stage === "screening" && (
-          <Badge variant="outline" className="w-fit mt-1 h-5 text-[10px] bg-background/50 text-chart-2 border-chart-2/30">
-            Text + Voice
-          </Badge>
-        )} */}
       </div>
 
       {/* Column Body: Droppable Area */}

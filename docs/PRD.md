@@ -39,7 +39,7 @@ This phase delivers a frontend-only, interactive prototype (built with tools lik
 
 Based on direct executive feedback, the prototype must visually demonstrate the following constraints and features:
 
-- 🚫 **No Video Screening:** All screening processes must visually indicate text + voice modalities only.
+- 🚫 **No Video Screening:** All screening is text + voice only — no video modality.
 - 📈 **Scale Capacity:** Designed to visually manage a volume of ~500 CVs per month seamlessly.
 - 🤖 **AI Job Description Writer:** Must include a dedicated UI flow for AI-generated job posts.
 - 👯 **Duplicate Detection (ROI):** The UI must demonstrate how the system flags duplicate candidates to save on sourcing fees.
@@ -86,7 +86,7 @@ The Dashboard is the operational center of the application, prioritizing **actio
 | **📈 Key Metrics Row**     | • Active Roles: `5`<br>• Candidates in Pipeline: `87`<br>• This Month's Hires: `2`<br>• AI Confidence Score: `91%`                                                                       | At-a-glance performance tracking       |
 | **✅ Today's Priorities**  | **Actionable list with AI suggestions:**<br>• Review 3 strong Senior PM candidates.<br>• Follow up with 8 candidates from last week.<br>• New job description ready for "Head of Sales". | Proactive guidance and task management |
 | **📄 Recent Applications** | Horizontal scroll or simple table of the latest 8 candidates showing:<br>_Photo, Name, Role, AI Score, and a "Quick View" button._                                                       | Fast access to new CVs                 |
-| **🧠 AI Insights Panel**   | "3 candidates in your Talent Pool are likely to respond this week."                                                                                                                      | Smart, predictive recommendations      |
+| **🧠 AI Insights Panel**   | "3 candidates in your Talent Pool are likely to respond this week." Each insight includes an animated confidence bar.                                                                    | Smart, predictive recommendations      |
 
 ---
 
@@ -106,7 +106,16 @@ The Dashboard is the operational center of the application, prioritizing **actio
 
 - **Jobs List:** A table of active and drafted positions.
 - **AI Generator Modal:** A click-through flow where the recruiter clicks _"Draft with AI"_, enters a short prompt, and the UI simulates typing out a fully formatted job description.
+- **Department Quick-Select:** Chip buttons (Engineering, Product, Design, Sales, Marketing, Operations) for one-click prompt population.
 
 ### 5.4 🤖 AI Agents
 
 - **Control Center:** A dedicated screen to visualize the "behind-the-scenes" magic. Shows mock toggles and activity logs for background agents _(e.g., "Auto-Enrichment Agent - Active", "Outreach Agent - Processing 5 emails")_.
+- **Activity Log:** Per-agent color-coded stripes on each activity row for at-a-glance readability. Simulates real-time updates every 5 seconds.
+
+### 5.5 📊 Reports
+
+- **KPI Cards Row:** Four stat cards at top — Total Hired, Time to Hire, Pipeline Conversion, AI Confidence — with animated counters.
+- **Charts:** Four charts — Hiring Funnel (bar), Hires Over Time (area), Source Distribution (donut), AI Confidence Trend (line).
+- **Date Range Toggle:** UI toggle for 7/30/90 day ranges. Charts are preview data; live filtering is a future backend feature.
+- **AI Summary Footer:** AI-generated plain English synthesis of chart data with recommendations (shimmer text).

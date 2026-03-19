@@ -33,7 +33,9 @@ export function WelcomeCard() {
       </div>
 
       <div className="relative">
-        <p className="text-sm font-medium text-muted-foreground mb-1">Wednesday, March 18, 2026</p>
+        <p className="text-sm font-medium text-muted-foreground mb-1">
+          {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
+        </p>
         <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-foreground">{greeting}, Sarah.</h1>
         <p className="mt-3 text-base text-muted-foreground leading-relaxed">
           You have{' '}

@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { motion } from 'motion/react';
+import { motion, type Variants } from 'motion/react';
 import { Sparkles, Plus } from 'lucide-react';
 import { PageHeader } from '@/components/shared/page-header';
 import { Button } from '@/components/ui/button';
@@ -9,7 +9,7 @@ import { AIJDWriter } from './ai-jd-writer';
 import { AIShimmer } from '@/components/shared/ai-shimmer';
 import { mockJobs } from '@/lib/mocks/jobs';
 
-const stagger: any = {
+const stagger: Variants = {
   initial: { opacity: 0 },
   animate: {
     opacity: 1,
@@ -17,7 +17,7 @@ const stagger: any = {
   },
 };
 
-const fadeUp: any = {
+const fadeUp: Variants = {
   initial: { opacity: 0, y: 15 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 };
