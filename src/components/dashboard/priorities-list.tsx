@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Check } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { mockPriorities } from '@/lib/mocks/priorities';
-import type { Priority } from '@/types';
-import { cn } from '@/lib/utils';
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { Sparkles, Check } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { mockPriorities } from '@/lib/mocks/priorities'
+import type { Priority } from '@/types'
+import { cn } from '@/lib/utils'
 
 function urgencyBadgeVariant(urgency: Priority['urgency']) {
-  if (urgency === 'high') return 'destructive';
-  if (urgency === 'medium') return 'default';
-  return 'secondary';
+  if (urgency === 'high') return 'destructive'
+  if (urgency === 'medium') return 'default'
+  return 'secondary'
 }
 
 export function PrioritiesList() {
-  const [priorities, setPriorities] = useState(mockPriorities);
+  const [priorities, setPriorities] = useState(mockPriorities)
 
   const toggle = (id: string) => {
-    setPriorities((prev) => prev.map((p) => (p.id === id ? { ...p, completed: !p.completed } : p)));
-  };
+    setPriorities((prev) => prev.map((p) => (p.id === id ? { ...p, completed: !p.completed } : p)))
+  }
 
   return (
     <div className="bg-card border border-border rounded-xl p-5 h-full">
@@ -77,5 +77,5 @@ export function PrioritiesList() {
         ))}
       </ul>
     </div>
-  );
+  )
 }

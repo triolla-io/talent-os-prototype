@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'motion/react';
+import { useState } from 'react'
+import { motion } from 'motion/react'
 import {
   BarChart,
   Bar,
@@ -16,21 +16,21 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
-} from 'recharts';
-import { BarChart3, TrendingUp, Users, Trophy, Brain, Sparkles, ArrowUpRight } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { AIShimmer } from '@/components/shared/ai-shimmer';
-import { AnimatedCounter } from '@/components/shared/animated-counter';
-import { pipelineChartData, hiringTrendData, sourceDistributionData } from '@/lib/mocks/metrics';
+} from 'recharts'
+import { BarChart3, TrendingUp, Users, Trophy, Brain, Sparkles, ArrowUpRight } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AIShimmer } from '@/components/shared/ai-shimmer'
+import { AnimatedCounter } from '@/components/shared/animated-counter'
+import { pipelineChartData, hiringTrendData, sourceDistributionData } from '@/lib/mocks/metrics'
 
 // AI Confidence trend — 30 data points hovering 88–93
 const aiConfidenceTrend = Array.from({ length: 30 }, (_, i) => ({
   name: `Day ${i + 1}`,
   value: Math.round(88 + Math.sin(i * 0.4) * 2.5 + Math.random() * 1.5),
-}));
+}))
 
-const RANGE_OPTIONS = ['7 Days', '30 Days', '90 Days'] as const;
-type RangeOption = (typeof RANGE_OPTIONS)[number];
+const RANGE_OPTIONS = ['7 Days', '30 Days', '90 Days'] as const
+type RangeOption = (typeof RANGE_OPTIONS)[number]
 
 // Custom tooltip for charts
 function ChartTooltip({
@@ -38,11 +38,11 @@ function ChartTooltip({
   payload,
   label,
 }: {
-  active?: boolean;
-  payload?: Array<{ value: number; name?: string; color?: string }>;
-  label?: string;
+  active?: boolean
+  payload?: Array<{ value: number; name?: string; color?: string }>
+  label?: string
 }) {
-  if (!active || !payload?.length) return null;
+  if (!active || !payload?.length) return null
   return (
     <div className="bg-card border border-border rounded-lg px-3 py-2 shadow-lg text-xs">
       <p className="font-semibold text-foreground mb-1">{label}</p>
@@ -55,10 +55,10 @@ function ChartTooltip({
         </p>
       ))}
     </div>
-  );
+  )
 }
 
-const DONUT_COLORS = ['oklch(0.55 0.25 275)', 'oklch(0.78 0.16 75)', 'oklch(0.72 0.19 160)', 'oklch(0.65 0.2 310)'];
+const DONUT_COLORS = ['oklch(0.55 0.25 275)', 'oklch(0.78 0.16 75)', 'oklch(0.72 0.19 160)', 'oklch(0.65 0.2 310)']
 
 const KPI_STATS = [
   {
@@ -98,10 +98,10 @@ const KPI_STATS = [
     trendClass: 'text-success',
     isAI: true,
   },
-];
+]
 
 export function ReportsPage() {
-  const [activeRange, setActiveRange] = useState<RangeOption>('30 Days');
+  const [activeRange, setActiveRange] = useState<RangeOption>('30 Days')
 
   return (
     <div className="space-y-6">
@@ -152,29 +152,29 @@ export function ReportsPage() {
 
           {/* Date range toggle */}
           <div className="flex flex-col items-end gap-1.5 self-start">
-          <div className="flex items-center gap-1 bg-muted/60 rounded-lg p-1">
-            {RANGE_OPTIONS.map((range) => (
-              <button
-                key={range}
-                onClick={() => setActiveRange(range)}
-                className={[
-                  'relative px-3 py-1.5 text-xs font-semibold rounded-md transition-all duration-200',
-                  activeRange === range ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground',
-                ].join(' ')}
-              >
-                {activeRange === range && (
-                  <motion.span
-                    layoutId="range-indicator"
-                    className="absolute inset-0 bg-card rounded-md shadow-sm"
-                    style={{ zIndex: -1 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-                {range}
-              </button>
-            ))}
-          </div>
-          <p className="text-[10px] text-muted-foreground/60">Live filtering coming soon</p>
+            <div className="flex items-center gap-1 bg-muted/60 rounded-lg p-1">
+              {RANGE_OPTIONS.map((range) => (
+                <button
+                  key={range}
+                  onClick={() => setActiveRange(range)}
+                  className={[
+                    'relative px-3 py-1.5 text-xs font-semibold rounded-md transition-all duration-200',
+                    activeRange === range ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground',
+                  ].join(' ')}
+                >
+                  {activeRange === range && (
+                    <motion.span
+                      layoutId="range-indicator"
+                      className="absolute inset-0 bg-card rounded-md shadow-sm"
+                      style={{ zIndex: -1 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  {range}
+                </button>
+              ))}
+            </div>
+            <p className="text-[10px] text-muted-foreground/60">Live filtering coming soon</p>
           </div>
         </div>
       </motion.div>
@@ -182,7 +182,7 @@ export function ReportsPage() {
       {/* KPI cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {KPI_STATS.map((stat, i) => {
-          const Icon = stat.icon;
+          const Icon = stat.icon
           return (
             <motion.div
               key={stat.label}
@@ -214,7 +214,7 @@ export function ReportsPage() {
                 </p>
               </div>
             </motion.div>
-          );
+          )
         })}
       </div>
 
@@ -325,8 +325,8 @@ export function ReportsPage() {
                     </Pie>
                     <Tooltip
                       content={({ active, payload }) => {
-                        if (!active || !payload?.length) return null;
-                        const d = payload[0];
+                        if (!active || !payload?.length) return null
+                        const d = payload[0]
                         return (
                           <div className="bg-card border border-border rounded-lg px-3 py-2 shadow-lg text-xs">
                             <p className="font-semibold">{d.name}</p>
@@ -334,7 +334,7 @@ export function ReportsPage() {
                               <span className="font-bold text-foreground">{d.value}%</span> of candidates
                             </p>
                           </div>
-                        );
+                        )
                       }}
                     />
                   </PieChart>
@@ -399,7 +399,7 @@ export function ReportsPage() {
                   />
                   <Tooltip
                     content={({ active, payload, label }) => {
-                      if (!active || !payload?.length) return null;
+                      if (!active || !payload?.length) return null
                       return (
                         <div className="bg-card border border-border rounded-lg px-3 py-2 shadow-lg text-xs">
                           <p className="text-muted-foreground mb-0.5">{label}</p>
@@ -407,7 +407,7 @@ export function ReportsPage() {
                             {payload[0].value}% confidence
                           </p>
                         </div>
-                      );
+                      )
                     }}
                     cursor={{ stroke: 'oklch(0.78 0.16 75)', strokeWidth: 1, strokeDasharray: '4 4' }}
                   />
@@ -446,5 +446,5 @@ export function ReportsPage() {
         </div>
       </motion.div>
     </div>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-import { useDroppable } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { type Candidate, type PipelineStage } from '@/types';
-import { CandidateCard } from './candidate-card';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+import { useDroppable } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { type Candidate, type PipelineStage } from '@/types'
+import { CandidateCard } from './candidate-card'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
 interface KanbanColumnProps {
-  stage: PipelineStage;
-  title: string;
-  candidates: Candidate[];
+  stage: PipelineStage
+  title: string
+  candidates: Candidate[]
 }
 
 export function KanbanColumn({ stage, title, candidates }: KanbanColumnProps) {
@@ -18,7 +18,7 @@ export function KanbanColumn({ stage, title, candidates }: KanbanColumnProps) {
       type: 'Column',
       stage,
     },
-  });
+  })
 
   // Calculate actual class names from the map or just use tailwind classes directly
   // PRD requests: New=primary, Screening=chart-2, Interview=chart-4, Offer=success, Hired=success, Rejected=destructive
@@ -29,7 +29,7 @@ export function KanbanColumn({ stage, title, candidates }: KanbanColumnProps) {
     offer: 'border-t-success',
     hired: 'border-t-success',
     rejected: 'border-t-destructive',
-  }[stage];
+  }[stage]
 
   return (
     <div
@@ -70,5 +70,5 @@ export function KanbanColumn({ stage, title, candidates }: KanbanColumnProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import { motion } from 'motion/react';
-import { Bot, Zap, CheckCircle2, Sparkles } from 'lucide-react';
-import { AgentCard } from './agent-card';
-import { ActivityLog } from './activity-log';
-import { AnimatedCounter } from '@/components/shared/animated-counter';
-import { AIShimmer } from '@/components/shared/ai-shimmer';
-import { mockAgents } from '@/lib/mocks/agents';
+import { motion } from 'motion/react'
+import { Bot, Zap, CheckCircle2, Sparkles } from 'lucide-react'
+import { AgentCard } from './agent-card'
+import { ActivityLog } from './activity-log'
+import { AnimatedCounter } from '@/components/shared/animated-counter'
+import { AIShimmer } from '@/components/shared/ai-shimmer'
+import { mockAgents } from '@/lib/mocks/agents'
 
 export function AgentsPage() {
-  const activeCount = mockAgents.filter((a) => a.status === 'active').length;
-  const totalProcessed = mockAgents.reduce((sum, a) => sum + a.processedToday, 0);
-  const avgSuccessRate = Math.round(mockAgents.reduce((sum, a) => sum + a.successRate, 0) / mockAgents.length);
+  const activeCount = mockAgents.filter((a) => a.status === 'active').length
+  const totalProcessed = mockAgents.reduce((sum, a) => sum + a.processedToday, 0)
+  const avgSuccessRate = Math.round(mockAgents.reduce((sum, a) => sum + a.successRate, 0) / mockAgents.length)
 
   const STATS = [
     {
@@ -49,7 +49,7 @@ export function AgentsPage() {
       subClass: 'text-success',
       isAI: true,
     },
-  ];
+  ]
 
   return (
     <div className="space-y-6">
@@ -112,7 +112,7 @@ export function AgentsPage() {
       {/* Stat cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {STATS.map((stat, i) => {
-          const Icon = stat.icon;
+          const Icon = stat.icon
           return (
             <motion.div
               key={stat.label}
@@ -141,7 +141,7 @@ export function AgentsPage() {
                 <p className={`text-xs mt-1 font-medium ${stat.subClass}`}>{stat.sub}</p>
               </div>
             </motion.div>
-          );
+          )
         })}
       </div>
 
@@ -164,5 +164,5 @@ export function AgentsPage() {
         <ActivityLog />
       </motion.div>
     </div>
-  );
+  )
 }

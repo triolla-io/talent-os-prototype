@@ -1,11 +1,11 @@
-import { motion } from 'motion/react';
-import { cn } from '@/lib/utils';
+import { motion } from 'motion/react'
+import { cn } from '@/lib/utils'
 
 interface PageHeaderProps {
-  title: string;
-  description?: string;
-  actions?: React.ReactNode;
-  className?: string;
+  title: string
+  description?: string
+  actions?: React.ReactNode
+  className?: string
 }
 
 export function PageHeader({ title, description, actions, className }: PageHeaderProps) {
@@ -22,5 +22,5 @@ export function PageHeader({ title, description, actions, className }: PageHeade
       </div>
       {actions && <div className="flex items-center gap-2 shrink-0">{actions}</div>}
     </motion.div>
-  );
+  )
 }

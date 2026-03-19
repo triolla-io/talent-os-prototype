@@ -1,10 +1,10 @@
-import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
-import { ScoreBadge } from '@/components/shared/score-badge';
-import { Button } from '@/components/ui/button';
-import { mockCandidates } from '@/lib/mocks/candidates';
+import { motion } from 'motion/react'
+import { ArrowRight } from 'lucide-react'
+import { ScoreBadge } from '@/components/shared/score-badge'
+import { Button } from '@/components/ui/button'
+import { mockCandidates } from '@/lib/mocks/candidates'
 
-const RECENT = mockCandidates.slice(0, 8);
+const RECENT = mockCandidates.slice(0, 8)
 
 export function RecentApplications() {
   return (
@@ -62,5 +62,5 @@ export function RecentApplications() {
         <div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-linear-to-l from-background to-transparent" />
       </div>
     </div>
-  );
+  )
 }

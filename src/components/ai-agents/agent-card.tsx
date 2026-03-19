@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { motion } from 'motion/react';
-import { Sparkles, Mail, ClipboardCheck, Copy, Heart, Calendar, type LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { toast } from 'sonner';
-import type { AIAgent } from '@/types';
+import { useState } from 'react'
+import { motion } from 'motion/react'
+import { Sparkles, Mail, ClipboardCheck, Copy, Heart, Calendar, type LucideIcon } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
+import type { AIAgent } from '@/types'
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Sparkles,
@@ -12,26 +12,26 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Copy,
   Heart,
   Calendar,
-};
+}
 
 interface AgentCardProps {
-  agent: AIAgent;
+  agent: AIAgent
 }
 
 export function AgentCard({ agent }: AgentCardProps) {
-  const [isActive, setIsActive] = useState(agent.status === 'active');
+  const [isActive, setIsActive] = useState(agent.status === 'active')
 
   const handleToggle = () => {
-    const next = !isActive;
-    setIsActive(next);
+    const next = !isActive
+    setIsActive(next)
     if (next) {
-      toast.success(`${agent.name} activated`);
+      toast.success(`${agent.name} activated`)
     } else {
-      toast(`${agent.name} paused`);
+      toast(`${agent.name} paused`)
     }
-  };
+  }
 
-  const Icon = ICON_MAP[agent.icon] ?? Sparkles;
+  const Icon = ICON_MAP[agent.icon] ?? Sparkles
 
   return (
     <motion.div
@@ -65,12 +65,7 @@ export function AgentCard({ agent }: AgentCardProps) {
                 isActive ? 'bg-linear-to-br from-success/20 to-success/5 shadow-sm' : 'bg-muted',
               )}
             >
-              <Icon
-                className={cn(
-                  'w-4 h-4 transition-colors duration-300',
-                  isActive ? 'text-success' : 'text-muted-foreground',
-                )}
-              />
+              <Icon className={cn('w-4 h-4 transition-colors duration-300', isActive ? 'text-success' : 'text-muted-foreground')} />
             </div>
 
             <div className="min-w-0 pt-0.5">
@@ -125,12 +120,7 @@ export function AgentCard({ agent }: AgentCardProps) {
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <span className="text-[11px] text-muted-foreground font-medium">Success rate</span>
-              <span
-                className={cn(
-                  'text-[11px] font-bold tabular-nums',
-                  isActive ? 'text-success' : 'text-foreground',
-                )}
-              >
+              <span className={cn('text-[11px] font-bold tabular-nums', isActive ? 'text-success' : 'text-foreground')}>
                 {agent.successRate}%
               </span>
             </div>
@@ -139,10 +129,7 @@ export function AgentCard({ agent }: AgentCardProps) {
                 initial={{ width: 0 }}
                 animate={{ width: `${agent.successRate}%` }}
                 transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className={cn(
-                  'h-full rounded-full',
-                  isActive ? 'bg-linear-to-r from-success/70 to-success' : 'bg-muted-foreground/40',
-                )}
+                className={cn('h-full rounded-full', isActive ? 'bg-linear-to-r from-success/70 to-success' : 'bg-muted-foreground/40')}
               />
             </div>
           </div>
@@ -155,5 +142,5 @@ export function AgentCard({ agent }: AgentCardProps) {
         </div>
       </div>
     </motion.div>
-  );
+  )
 }

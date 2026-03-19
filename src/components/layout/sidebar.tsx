@@ -1,7 +1,7 @@
-import { motion } from 'motion/react';
-import { LayoutDashboard, Kanban, Users, Briefcase, Bot, BarChart3 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { PageId } from '@/types';
+import { motion } from 'motion/react'
+import { LayoutDashboard, Kanban, Users, Briefcase, Bot, BarChart3 } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import type { PageId } from '@/types'
 
 const NAV_ITEMS = [
   { id: 'dashboard' as PageId, label: 'Dashboard', icon: LayoutDashboard },
@@ -10,11 +10,11 @@ const NAV_ITEMS = [
   { id: 'jobs' as PageId, label: 'Job Openings', icon: Briefcase },
   { id: 'ai-agents' as PageId, label: 'AI Agents', icon: Bot },
   { id: 'reports' as PageId, label: 'Reports', icon: BarChart3 },
-];
+]
 
 interface SidebarProps {
-  activePage: PageId;
-  onNavigate: (page: PageId) => void;
+  activePage: PageId
+  onNavigate: (page: PageId) => void
 }
 
 export function Sidebar({ activePage, onNavigate }: SidebarProps) {
@@ -22,8 +22,8 @@ export function Sidebar({ activePage, onNavigate }: SidebarProps) {
     <aside className="hidden md:flex flex-col w-64 shrink-0 h-[calc(100vh-4rem)] sticky top-16 border-r border-sidebar-border bg-sidebar overflow-y-auto">
       <nav className="flex-1 p-3 space-y-0.5">
         {NAV_ITEMS.map((item, index) => {
-          const isActive = activePage === item.id;
-          const Icon = item.icon;
+          const isActive = activePage === item.id
+          const Icon = item.icon
 
           return (
             <motion.button
@@ -60,7 +60,7 @@ export function Sidebar({ activePage, onNavigate }: SidebarProps) {
                 </span>
               )}
             </motion.button>
-          );
+          )
         })}
       </nav>
 
@@ -74,5 +74,5 @@ export function Sidebar({ activePage, onNavigate }: SidebarProps) {
         </div>
       </div>
     </aside>
-  );
+  )
 }

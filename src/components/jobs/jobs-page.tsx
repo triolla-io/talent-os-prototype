@@ -1,13 +1,13 @@
-import { useState, useMemo } from 'react';
-import { motion, type Variants } from 'motion/react';
-import { Sparkles, Plus } from 'lucide-react';
-import { PageHeader } from '@/components/shared/page-header';
-import { Button } from '@/components/ui/button';
-import { JobsTable } from './jobs-table';
-import { JobsSearch } from './jobs-search';
-import { AIJDWriter } from './ai-jd-writer';
-import { AIShimmer } from '@/components/shared/ai-shimmer';
-import { mockJobs } from '@/lib/mocks/jobs';
+import { useState, useMemo } from 'react'
+import { motion, type Variants } from 'motion/react'
+import { Sparkles, Plus } from 'lucide-react'
+import { PageHeader } from '@/components/shared/page-header'
+import { Button } from '@/components/ui/button'
+import { JobsTable } from './jobs-table'
+import { JobsSearch } from './jobs-search'
+import { AIJDWriter } from './ai-jd-writer'
+import { AIShimmer } from '@/components/shared/ai-shimmer'
+import { mockJobs } from '@/lib/mocks/jobs'
 
 const stagger: Variants = {
   initial: { opacity: 0 },
@@ -15,35 +15,35 @@ const stagger: Variants = {
     opacity: 1,
     transition: { staggerChildren: 0.1 },
   },
-};
+}
 
 const fadeUp: Variants = {
   initial: { opacity: 0, y: 15 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-};
+}
 
 export function JobsPage() {
-  const [isWriterOpen, setIsWriterOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeFilter, setActiveFilter] = useState<'all' | 'active' | 'draft' | 'paused' | 'closed'>('all');
+  const [isWriterOpen, setIsWriterOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [activeFilter, setActiveFilter] = useState<'all' | 'active' | 'draft' | 'paused' | 'closed'>('all')
 
   const filteredJobs = useMemo(() => {
-    let result = mockJobs;
+    let result = mockJobs
     if (searchQuery) {
-      const q = searchQuery.toLowerCase();
+      const q = searchQuery.toLowerCase()
       result = result.filter(
         (j) => j.title.toLowerCase().includes(q) || j.department.toLowerCase().includes(q) || j.hiringManager.toLowerCase().includes(q),
-      );
+      )
     }
     if (activeFilter !== 'all') {
-      result = result.filter((j) => j.status === activeFilter);
+      result = result.filter((j) => j.status === activeFilter)
     }
-    return result;
-  }, [searchQuery, activeFilter]);
+    return result
+  }, [searchQuery, activeFilter])
 
-  const activeCount = mockJobs.filter((j) => j.status === 'active').length;
-  const draftCount = mockJobs.filter((j) => j.status === 'draft').length;
-  const totalCandidates = mockJobs.reduce((sum, j) => sum + j.candidateCount, 0);
+  const activeCount = mockJobs.filter((j) => j.status === 'active').length
+  const draftCount = mockJobs.filter((j) => j.status === 'draft').length
+  const totalCandidates = mockJobs.reduce((sum, j) => sum + j.candidateCount, 0)
 
   return (
     <motion.div variants={stagger} initial="initial" animate="animate" className="space-y-6">
@@ -91,5 +91,5 @@ export function JobsPage() {
 
       <AIJDWriter open={isWriterOpen} onOpenChange={setIsWriterOpen} />
     </motion.div>
-  );
+  )
 }

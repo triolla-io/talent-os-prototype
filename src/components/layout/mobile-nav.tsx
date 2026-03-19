@@ -1,7 +1,7 @@
-import { motion } from 'motion/react';
-import { LayoutDashboard, Kanban, Users, Briefcase, Bot, BarChart3 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { PageId } from '@/types';
+import { motion } from 'motion/react'
+import { LayoutDashboard, Kanban, Users, Briefcase, Bot, BarChart3 } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import type { PageId } from '@/types'
 
 const MOBILE_NAV_ITEMS = [
   { id: 'dashboard' as PageId, label: 'Home', icon: LayoutDashboard },
@@ -10,11 +10,11 @@ const MOBILE_NAV_ITEMS = [
   { id: 'jobs' as PageId, label: 'Jobs', icon: Briefcase },
   { id: 'ai-agents' as PageId, label: 'Agents', icon: Bot },
   { id: 'reports' as PageId, label: 'Reports', icon: BarChart3 },
-];
+]
 
 interface MobileNavProps {
-  activePage: PageId;
-  onNavigate: (page: PageId) => void;
+  activePage: PageId
+  onNavigate: (page: PageId) => void
 }
 
 export function MobileNav({ activePage, onNavigate }: MobileNavProps) {
@@ -22,8 +22,8 @@ export function MobileNav({ activePage, onNavigate }: MobileNavProps) {
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
       <div className="flex items-stretch" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         {MOBILE_NAV_ITEMS.map((item) => {
-          const isActive = activePage === item.id;
-          const Icon = item.icon;
+          const isActive = activePage === item.id
+          const Icon = item.icon
 
           return (
             <button
@@ -48,9 +48,9 @@ export function MobileNav({ activePage, onNavigate }: MobileNavProps) {
                 {item.label}
               </span>
             </button>
-          );
+          )
         })}
       </div>
     </nav>
-  );
+  )
 }

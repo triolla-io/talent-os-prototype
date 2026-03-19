@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { Search, X } from 'lucide-react';
-import { motion } from 'motion/react';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+import { useState } from 'react'
+import { Search, X } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
-type FilterValue = 'all' | 'high-score' | 'available' | 'referred' | 'duplicates';
+type FilterValue = 'all' | 'high-score' | 'available' | 'referred' | 'duplicates'
 
 interface CandidateSearchProps {
-  query: string;
-  onQueryChange: (q: string) => void;
-  activeFilter: FilterValue;
-  onFilterChange: (f: FilterValue) => void;
+  query: string
+  onQueryChange: (q: string) => void
+  activeFilter: FilterValue
+  onFilterChange: (f: FilterValue) => void
 }
 
 const FILTERS: { label: string; value: FilterValue }[] = [
@@ -19,10 +19,10 @@ const FILTERS: { label: string; value: FilterValue }[] = [
   { label: 'Available Now', value: 'available' },
   { label: 'Referred', value: 'referred' },
   { label: 'Duplicates', value: 'duplicates' },
-];
+]
 
 export function CandidateSearch({ query, onQueryChange, activeFilter, onFilterChange }: CandidateSearchProps) {
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = useState(false)
 
   return (
     <div className="flex flex-col gap-3 w-full">
@@ -74,5 +74,5 @@ export function CandidateSearch({ query, onQueryChange, activeFilter, onFilterCh
         ))}
       </div>
     </div>
-  );
+  )
 }

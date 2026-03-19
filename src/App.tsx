@@ -1,15 +1,15 @@
-import { AnimatePresence, motion } from 'motion/react';
-import { AppLayout } from '@/components/layout/app-layout';
-import { useActivePage } from '@/hooks/use-active-page';
-import { DashboardPage } from '@/components/dashboard/dashboard-page';
-import { PipelinePage } from '@/components/pipeline/pipeline-page';
-import { TalentPoolPage } from '@/components/talent-pool/talent-pool-page';
-import { JobsPage } from '@/components/jobs/jobs-page';
-import { AgentsPage } from '@/components/ai-agents/agents-page';
-import { ReportsPage } from '@/components/reports/reports-page';
+import { AnimatePresence, motion } from 'motion/react'
+import { AppLayout } from '@/components/layout/app-layout'
+import { useActivePage } from '@/hooks/use-active-page'
+import { DashboardPage } from '@/components/dashboard/dashboard-page'
+import { PipelinePage } from '@/components/pipeline/pipeline-page'
+import { TalentPoolPage } from '@/components/talent-pool/talent-pool-page'
+import { JobsPage } from '@/components/jobs/jobs-page'
+import { AgentsPage } from '@/components/ai-agents/agents-page'
+import { ReportsPage } from '@/components/reports/reports-page'
 
 function App() {
-  const { activePage, navigate } = useActivePage();
+  const { activePage, navigate } = useActivePage()
 
   return (
     <AppLayout activePage={activePage} onNavigate={navigate}>
@@ -30,7 +30,7 @@ function App() {
         </motion.div>
       </AnimatePresence>
     </AppLayout>
-  );
+  )
 }
 
-export default App;
+export default App

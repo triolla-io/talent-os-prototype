@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { Search, X } from 'lucide-react';
-import { motion } from 'motion/react';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+import { useState } from 'react'
+import { Search, X } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
-type FilterValue = 'all' | 'active' | 'draft' | 'paused' | 'closed';
+type FilterValue = 'all' | 'active' | 'draft' | 'paused' | 'closed'
 
 interface JobsSearchProps {
-  query: string;
-  onQueryChange: (q: string) => void;
-  activeFilter: FilterValue;
-  onFilterChange: (f: FilterValue) => void;
+  query: string
+  onQueryChange: (q: string) => void
+  activeFilter: FilterValue
+  onFilterChange: (f: FilterValue) => void
 }
 
 const FILTERS: { label: string; value: FilterValue }[] = [
@@ -19,10 +19,10 @@ const FILTERS: { label: string; value: FilterValue }[] = [
   { label: 'Drafts', value: 'draft' },
   { label: 'Paused', value: 'paused' },
   { label: 'Closed', value: 'closed' },
-];
+]
 
 export function JobsSearch({ query, onQueryChange, activeFilter, onFilterChange }: JobsSearchProps) {
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = useState(false)
 
   return (
     <div className="flex flex-col gap-3 w-full">
@@ -74,5 +74,5 @@ export function JobsSearch({ query, onQueryChange, activeFilter, onFilterChange 
         ))}
       </div>
     </div>
-  );
+  )
 }

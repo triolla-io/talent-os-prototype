@@ -1,7 +1,7 @@
-import { PageHeader } from '@/components/shared/page-header';
-import { KanbanBoard } from './kanban-board';
-import { Button } from '@/components/ui/button';
-import { Plus, Filter } from 'lucide-react';
+import { PageHeader } from '@/components/shared/page-header'
+import { KanbanBoard } from './kanban-board'
+import { Button } from '@/components/ui/button'
+import { Plus, Filter } from 'lucide-react'
 
 export function PipelinePage() {
   return (
@@ -26,5 +26,5 @@ export function PipelinePage() {
         <KanbanBoard />
       </div>
     </div>
-  );
+  )
 }

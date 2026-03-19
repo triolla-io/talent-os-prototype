@@ -99,8 +99,8 @@ src/
 ## Import Alias
 
 ```typescript
-import { Button } from '@/components/ui/button';
-import { mockCandidates } from '@/lib/mocks/candidates';
+import { Button } from '@/components/ui/button'
+import { mockCandidates } from '@/lib/mocks/candidates'
 ```
 
 ## Naming Conventions

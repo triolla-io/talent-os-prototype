@@ -1,7 +1,7 @@
-import { motion } from 'motion/react';
-import { Brain, Lightbulb, Target, AlertTriangle } from 'lucide-react';
-import { mockInsights } from '@/lib/mocks/priorities';
-import type { AIInsight } from '@/types';
+import { motion } from 'motion/react'
+import { Brain, Lightbulb, Target, AlertTriangle } from 'lucide-react'
+import { mockInsights } from '@/lib/mocks/priorities'
+import type { AIInsight } from '@/types'
 
 const TYPE_CONFIG: Record<AIInsight['type'], { icon: typeof Lightbulb; iconClass: string; bgClass: string }> = {
   prediction: {
@@ -19,7 +19,7 @@ const TYPE_CONFIG: Record<AIInsight['type'], { icon: typeof Lightbulb; iconClass
     iconClass: 'text-ai-amber',
     bgClass: 'bg-ai-amber/10',
   },
-};
+}
 
 export function AIInsightsPanel() {
   return (
@@ -41,7 +41,7 @@ export function AIInsightsPanel() {
         {/* Insights */}
         <div className="flex flex-col gap-3 flex-1">
           {mockInsights.map((insight, i) => {
-            const { icon: Icon, iconClass, bgClass } = TYPE_CONFIG[insight.type];
+            const { icon: Icon, iconClass, bgClass } = TYPE_CONFIG[insight.type]
             return (
               <motion.div
                 key={insight.id}
@@ -70,7 +70,7 @@ export function AIInsightsPanel() {
                 </div>
                 {i < mockInsights.length - 1 && <div className="mt-3 border-t border-border/50" />}
               </motion.div>
-            );
+            )
           })}
         </div>
 
@@ -82,5 +82,5 @@ export function AIInsightsPanel() {
         </div>
       </div>
     </motion.div>
-  );
+  )
 }

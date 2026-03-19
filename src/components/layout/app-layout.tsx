@@ -1,12 +1,12 @@
-import { TopNav } from './top-nav';
-import { Sidebar } from './sidebar';
-import { MobileNav } from './mobile-nav';
-import type { PageId } from '@/types';
+import { TopNav } from './top-nav'
+import { Sidebar } from './sidebar'
+import { MobileNav } from './mobile-nav'
+import type { PageId } from '@/types'
 
 interface AppLayoutProps {
-  activePage: PageId;
-  onNavigate: (page: PageId) => void;
-  children: React.ReactNode;
+  activePage: PageId
+  onNavigate: (page: PageId) => void
+  children: React.ReactNode
 }
 
 export function AppLayout({ activePage, onNavigate, children }: AppLayoutProps) {
@@ -19,5 +19,5 @@ export function AppLayout({ activePage, onNavigate, children }: AppLayoutProps) 
       </div>
       <MobileNav activePage={activePage} onNavigate={onNavigate} />
     </div>
-  );
+  )
 }

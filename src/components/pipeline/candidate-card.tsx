@@ -1,22 +1,22 @@
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { type Candidate } from '@/types';
-import { ScoreBadge } from '@/components/shared/score-badge';
-import { Badge } from '@/components/ui/badge';
-import { AlertTriangle } from 'lucide-react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { cn } from '@/lib/utils';
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import { type Candidate } from '@/types'
+import { ScoreBadge } from '@/components/shared/score-badge'
+import { Badge } from '@/components/ui/badge'
+import { AlertTriangle } from 'lucide-react'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { cn } from '@/lib/utils'
 
 interface CandidateCardProps {
-  candidate: Candidate;
-  isOverlay?: boolean;
+  candidate: Candidate
+  isOverlay?: boolean
 }
 
 function getRelativeTime(dateStr: string) {
-  const diffDays = Math.floor((new Date().getTime() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24));
-  if (diffDays === 0) return 'Today';
-  if (diffDays === 1) return 'Yesterday';
-  return `${diffDays} days ago`;
+  const diffDays = Math.floor((new Date().getTime() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24))
+  if (diffDays === 0) return 'Today'
+  if (diffDays === 1) return 'Yesterday'
+  return `${diffDays} days ago`
 }
 
 export function CandidateCard({ candidate, isOverlay = false }: CandidateCardProps) {
@@ -26,7 +26,7 @@ export function CandidateCard({ candidate, isOverlay = false }: CandidateCardPro
       type: 'Candidate',
       candidate,
     },
-  });
+  })
 
   const style = {
     // Only apply the transform/transition for the sortable items, not the overlay
@@ -34,9 +34,9 @@ export function CandidateCard({ candidate, isOverlay = false }: CandidateCardPro
     transition,
     // The placeholder behind the drag should be faint
     opacity: isDragging ? 0.3 : 1,
-  };
+  }
 
-  const isDuplicate = candidate.isDuplicate;
+  const isDuplicate = candidate.isDuplicate
 
   return (
     <div
@@ -106,5 +106,5 @@ export function CandidateCard({ candidate, isOverlay = false }: CandidateCardPro
         <span className="shrink-0 whitespace-nowrap">{getRelativeTime(candidate.appliedDate)}</span>
       </div>
     </div>
-  );
+  )
 }

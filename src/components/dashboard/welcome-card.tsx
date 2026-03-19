@@ -1,10 +1,10 @@
-import { motion } from 'motion/react';
-import { Sparkles } from 'lucide-react';
-import { AnimatedCounter } from '@/components/shared/animated-counter';
+import { motion } from 'motion/react'
+import { Sparkles } from 'lucide-react'
+import { AnimatedCounter } from '@/components/shared/animated-counter'
 
 export function WelcomeCard() {
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const hour = new Date().getHours()
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
 
   return (
     <motion.div
@@ -56,5 +56,5 @@ export function WelcomeCard() {
         </p>
       </div>
     </motion.div>
-  );
+  )
 }

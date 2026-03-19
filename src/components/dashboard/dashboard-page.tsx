@@ -1,13 +1,13 @@
-import { motion } from 'motion/react';
-import { WelcomeCard } from './welcome-card';
-import { MetricsRow } from './metrics-row';
-import { PrioritiesList } from './priorities-list';
-import { RecentApplications } from './recent-applications';
-import { AIInsightsPanel } from './ai-insights-panel';
+import { motion } from 'motion/react'
+import { WelcomeCard } from './welcome-card'
+import { MetricsRow } from './metrics-row'
+import { PrioritiesList } from './priorities-list'
+import { RecentApplications } from './recent-applications'
+import { AIInsightsPanel } from './ai-insights-panel'
 
 const stagger = {
   animate: { transition: { staggerChildren: 0.1 } },
-};
+}
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -16,7 +16,7 @@ const fadeUp = {
     y: 0,
     transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
-};
+}
 
 export function DashboardPage() {
   return (
@@ -42,5 +42,5 @@ export function DashboardPage() {
         <RecentApplications />
       </motion.div>
     </motion.div>
-  );
+  )
 }

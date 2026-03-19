@@ -531,92 +531,92 @@ git commit -m "feat: establish design system — Plus Jakarta Sans, warm palette
 ```typescript
 // src/types/index.ts
 
-export type PageId = 'dashboard' | 'pipeline' | 'talent-pool' | 'jobs' | 'ai-agents' | 'reports';
+export type PageId = 'dashboard' | 'pipeline' | 'talent-pool' | 'jobs' | 'ai-agents' | 'reports'
 
 export interface Candidate {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  avatar: string; // URL or initials placeholder
-  role: string; // Role they applied for
-  aiScore: number; // 0-100 AI match score
-  source: string; // "LinkedIn", "Agency - TechHunt", "Referral", etc.
-  appliedDate: string; // ISO date string
-  status: PipelineStage;
-  skills: string[];
-  experience: string; // "5 years", "Senior", etc.
-  location: string;
-  isDuplicate?: boolean;
-  duplicateSource?: string; // "Agency - TechHunt submitted this candidate who already exists"
-  notes?: string;
+  id: string
+  name: string
+  email: string
+  phone: string
+  avatar: string // URL or initials placeholder
+  role: string // Role they applied for
+  aiScore: number // 0-100 AI match score
+  source: string // "LinkedIn", "Agency - TechHunt", "Referral", etc.
+  appliedDate: string // ISO date string
+  status: PipelineStage
+  skills: string[]
+  experience: string // "5 years", "Senior", etc.
+  location: string
+  isDuplicate?: boolean
+  duplicateSource?: string // "Agency - TechHunt submitted this candidate who already exists"
+  notes?: string
 }
 
-export type PipelineStage = 'new' | 'screening' | 'interview' | 'offer' | 'hired' | 'rejected';
+export type PipelineStage = 'new' | 'screening' | 'interview' | 'offer' | 'hired' | 'rejected'
 
 export interface Job {
-  id: string;
-  title: string;
-  department: string;
-  location: string;
-  type: 'full-time' | 'part-time' | 'contract';
-  status: 'active' | 'draft' | 'closed' | 'paused';
-  candidateCount: number;
-  postedDate: string;
-  description?: string;
-  requirements?: string[];
-  salaryRange?: string;
-  hiringManager: string;
+  id: string
+  title: string
+  department: string
+  location: string
+  type: 'full-time' | 'part-time' | 'contract'
+  status: 'active' | 'draft' | 'closed' | 'paused'
+  candidateCount: number
+  postedDate: string
+  description?: string
+  requirements?: string[]
+  salaryRange?: string
+  hiringManager: string
 }
 
 export interface AIAgent {
-  id: string;
-  name: string;
-  description: string;
-  status: 'active' | 'paused' | 'idle';
-  icon: string; // lucide icon name
-  lastActivity: string;
-  processedToday: number;
-  successRate: number; // 0-100
-  activities: AgentActivity[];
+  id: string
+  name: string
+  description: string
+  status: 'active' | 'paused' | 'idle'
+  icon: string // lucide icon name
+  lastActivity: string
+  processedToday: number
+  successRate: number // 0-100
+  activities: AgentActivity[]
 }
 
 export interface AgentActivity {
-  id: string;
-  agentId: string;
-  action: string;
-  target: string;
-  timestamp: string;
-  status: 'completed' | 'in-progress' | 'failed';
+  id: string
+  agentId: string
+  action: string
+  target: string
+  timestamp: string
+  status: 'completed' | 'in-progress' | 'failed'
 }
 
 export interface DashboardMetrics {
-  activeRoles: number;
-  candidatesInPipeline: number;
-  monthlyHires: number;
-  aiConfidenceScore: number;
+  activeRoles: number
+  candidatesInPipeline: number
+  monthlyHires: number
+  aiConfidenceScore: number
 }
 
 export interface Priority {
-  id: string;
-  text: string;
-  type: 'review' | 'follow-up' | 'action' | 'ai-suggestion';
-  urgency: 'high' | 'medium' | 'low';
-  relatedCount?: number;
-  completed: boolean;
+  id: string
+  text: string
+  type: 'review' | 'follow-up' | 'action' | 'ai-suggestion'
+  urgency: 'high' | 'medium' | 'low'
+  relatedCount?: number
+  completed: boolean
 }
 
 export interface AIInsight {
-  id: string;
-  text: string;
-  type: 'prediction' | 'recommendation' | 'alert';
-  confidence: number;
+  id: string
+  text: string
+  type: 'prediction' | 'recommendation' | 'alert'
+  confidence: number
 }
 
 export interface ChartDataPoint {
-  name: string;
-  value: number;
-  fill?: string;
+  name: string
+  value: number
+  fill?: string
 }
 ```
 
@@ -718,17 +718,17 @@ git commit -m "feat: add comprehensive mock data for all views"
 
 ```typescript
 // src/hooks/use-active-page.ts
-import { useState, useCallback } from 'react';
-import type { PageId } from '@/types';
+import { useState, useCallback } from 'react'
+import type { PageId } from '@/types'
 
 export function useActivePage(initialPage: PageId = 'dashboard') {
-  const [activePage, setActivePage] = useState<PageId>(initialPage);
+  const [activePage, setActivePage] = useState<PageId>(initialPage)
 
   const navigate = useCallback((page: PageId) => {
-    setActivePage(page);
-  }, []);
+    setActivePage(page)
+  }, [])
 
-  return { activePage, navigate } as const;
+  return { activePage, navigate } as const
 }
 ```
 
@@ -755,37 +755,37 @@ git commit -m "feat: add page navigation state hook"
 
 ```typescript
 // src/hooks/use-animated-counter.ts
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'
 
 export function useAnimatedCounter(target: number, duration: number = 1200) {
-  const [count, setCount] = useState(0);
-  const startTime = useRef<number | null>(null);
-  const animationFrame = useRef<number>();
+  const [count, setCount] = useState(0)
+  const startTime = useRef<number | null>(null)
+  const animationFrame = useRef<number>()
 
   useEffect(() => {
-    startTime.current = null;
+    startTime.current = null
 
     const animate = (timestamp: number) => {
-      if (!startTime.current) startTime.current = timestamp;
-      const elapsed = timestamp - startTime.current;
-      const progress = Math.min(elapsed / duration, 1);
+      if (!startTime.current) startTime.current = timestamp
+      const elapsed = timestamp - startTime.current
+      const progress = Math.min(elapsed / duration, 1)
 
       // Ease-out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * target));
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.round(eased * target))
 
       if (progress < 1) {
-        animationFrame.current = requestAnimationFrame(animate);
+        animationFrame.current = requestAnimationFrame(animate)
       }
-    };
+    }
 
-    animationFrame.current = requestAnimationFrame(animate);
+    animationFrame.current = requestAnimationFrame(animate)
     return () => {
-      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
-    };
-  }, [target, duration]);
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current)
+    }
+  }, [target, duration])
 
-  return count;
+  return count
 }
 ```
 
@@ -793,25 +793,25 @@ export function useAnimatedCounter(target: number, duration: number = 1200) {
 
 ```tsx
 // src/components/shared/ai-shimmer.tsx
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
 interface AIShimmerProps {
-  children: React.ReactNode;
-  className?: string;
-  as?: 'span' | 'div' | 'p';
+  children: React.ReactNode
+  className?: string
+  as?: 'span' | 'div' | 'p'
 }
 
 export function AIShimmer({ children, className, as: Tag = 'span' }: AIShimmerProps) {
-  return <Tag className={cn('ai-shimmer font-semibold', className)}>{children}</Tag>;
+  return <Tag className={cn('ai-shimmer font-semibold', className)}>{children}</Tag>
 }
 
 interface AIGlowCardProps {
-  children: React.ReactNode;
-  className?: string;
+  children: React.ReactNode
+  className?: string
 }
 
 export function AIGlowCard({ children, className }: AIGlowCardProps) {
-  return <div className={cn('ai-glow-border rounded-xl', className)}>{children}</div>;
+  return <div className={cn('ai-glow-border rounded-xl', className)}>{children}</div>
 }
 ```
 
@@ -821,26 +821,26 @@ A circular badge showing the AI match score. Uses SVG for the circular progress 
 
 ```tsx
 // src/components/shared/score-badge.tsx
-import { cn } from '@/lib/utils';
-import { motion } from 'motion/react';
+import { cn } from '@/lib/utils'
+import { motion } from 'motion/react'
 
 interface ScoreBadgeProps {
-  score: number;
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
+  score: number
+  size?: 'sm' | 'md' | 'lg'
+  className?: string
 }
 
 export function ScoreBadge({ score, size = 'md', className }: ScoreBadgeProps) {
-  const sizeMap = { sm: 32, md: 44, lg: 56 };
-  const fontSizeMap = { sm: 'text-xs', md: 'text-sm', lg: 'text-base' };
-  const strokeWidthMap = { sm: 3, md: 3.5, lg: 4 };
-  const s = sizeMap[size];
-  const strokeWidth = strokeWidthMap[size];
-  const radius = (s - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (score / 100) * circumference;
+  const sizeMap = { sm: 32, md: 44, lg: 56 }
+  const fontSizeMap = { sm: 'text-xs', md: 'text-sm', lg: 'text-base' }
+  const strokeWidthMap = { sm: 3, md: 3.5, lg: 4 }
+  const s = sizeMap[size]
+  const strokeWidth = strokeWidthMap[size]
+  const radius = (s - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
+  const offset = circumference - (score / 100) * circumference
 
-  const color = score >= 80 ? 'stroke-success' : score >= 60 ? 'stroke-warning' : 'stroke-destructive';
+  const color = score >= 80 ? 'stroke-success' : score >= 60 ? 'stroke-warning' : 'stroke-destructive'
 
   return (
     <div className={cn('relative inline-flex items-center justify-center', className)} style={{ width: s, height: s }}>
@@ -862,7 +862,7 @@ export function ScoreBadge({ score, size = 'md', className }: ScoreBadgeProps) {
       </svg>
       <span className={cn('absolute font-bold', fontSizeMap[size])}>{score}</span>
     </div>
-  );
+  )
 }
 ```
 
@@ -870,26 +870,26 @@ export function ScoreBadge({ score, size = 'md', className }: ScoreBadgeProps) {
 
 ```tsx
 // src/components/shared/animated-counter.tsx
-import { useAnimatedCounter } from '@/hooks/use-animated-counter';
-import { cn } from '@/lib/utils';
+import { useAnimatedCounter } from '@/hooks/use-animated-counter'
+import { cn } from '@/lib/utils'
 
 interface AnimatedCounterProps {
-  value: number;
-  duration?: number;
-  suffix?: string;
-  prefix?: string;
-  className?: string;
+  value: number
+  duration?: number
+  suffix?: string
+  prefix?: string
+  className?: string
 }
 
 export function AnimatedCounter({ value, duration, suffix = '', prefix = '', className }: AnimatedCounterProps) {
-  const count = useAnimatedCounter(value, duration);
+  const count = useAnimatedCounter(value, duration)
   return (
     <span className={cn('tabular-nums', className)}>
       {prefix}
       {count}
       {suffix}
     </span>
-  );
+  )
 }
 ```
 
@@ -897,14 +897,14 @@ export function AnimatedCounter({ value, duration, suffix = '', prefix = '', cla
 
 ```tsx
 // src/components/shared/page-header.tsx
-import { motion } from 'motion/react';
-import { cn } from '@/lib/utils';
+import { motion } from 'motion/react'
+import { cn } from '@/lib/utils'
 
 interface PageHeaderProps {
-  title: string;
-  description?: string;
-  actions?: React.ReactNode;
-  className?: string;
+  title: string
+  description?: string
+  actions?: React.ReactNode
+  className?: string
 }
 
 export function PageHeader({ title, description, actions, className }: PageHeaderProps) {
@@ -921,7 +921,7 @@ export function PageHeader({ title, description, actions, className }: PageHeade
       </div>
       {actions && <div className="flex items-center gap-2 shrink-0">{actions}</div>}
     </motion.div>
-  );
+  )
 }
 ```
 
@@ -1034,19 +1034,19 @@ git commit -m "feat: add sidebar with sliding active indicator animation"
 
 ```typescript
 // src/hooks/use-mobile.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 export function useMobile(breakpoint: number = 768) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < breakpoint);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, [breakpoint]);
+    const check = () => setIsMobile(window.innerWidth < breakpoint)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [breakpoint])
 
-  return isMobile;
+  return isMobile
 }
 ```
 
@@ -1080,15 +1080,15 @@ git commit -m "feat: add mobile bottom navigation bar"
 
 ```tsx
 // src/components/layout/app-layout.tsx
-import { TopNav } from './top-nav';
-import { Sidebar } from './sidebar';
-import { MobileNav } from './mobile-nav';
-import type { PageId } from '@/types';
+import { TopNav } from './top-nav'
+import { Sidebar } from './sidebar'
+import { MobileNav } from './mobile-nav'
+import type { PageId } from '@/types'
 
 interface AppLayoutProps {
-  activePage: PageId;
-  onNavigate: (page: PageId) => void;
-  children: React.ReactNode;
+  activePage: PageId
+  onNavigate: (page: PageId) => void
+  children: React.ReactNode
 }
 
 export function AppLayout({ activePage, onNavigate, children }: AppLayoutProps) {
@@ -1101,7 +1101,7 @@ export function AppLayout({ activePage, onNavigate, children }: AppLayoutProps) 
       </div>
       <MobileNav activePage={activePage} onNavigate={onNavigate} />
     </div>
-  );
+  )
 }
 ```
 
@@ -1109,12 +1109,12 @@ export function AppLayout({ activePage, onNavigate, children }: AppLayoutProps) 
 
 ```tsx
 // src/App.tsx
-import { AnimatePresence, motion } from 'motion/react';
-import { AppLayout } from '@/components/layout/app-layout';
-import { useActivePage } from '@/hooks/use-active-page';
+import { AnimatePresence, motion } from 'motion/react'
+import { AppLayout } from '@/components/layout/app-layout'
+import { useActivePage } from '@/hooks/use-active-page'
 
 function App() {
-  const { activePage, navigate } = useActivePage();
+  const { activePage, navigate } = useActivePage()
 
   return (
     <AppLayout activePage={activePage} onNavigate={navigate}>
@@ -1135,10 +1135,10 @@ function App() {
         </motion.div>
       </AnimatePresence>
     </AppLayout>
-  );
+  )
 }
 
-export default App;
+export default App
 ```
 
 - [ ] **Step 3: Full visual verification**
@@ -1360,21 +1360,21 @@ git commit -m "feat: add AI insights panel with animated gradient border"
 
 ```tsx
 // src/components/dashboard/dashboard-page.tsx
-import { motion } from 'motion/react';
-import { WelcomeCard } from './welcome-card';
-import { MetricsRow } from './metrics-row';
-import { PrioritiesList } from './priorities-list';
-import { RecentApplications } from './recent-applications';
-import { AIInsightsPanel } from './ai-insights-panel';
+import { motion } from 'motion/react'
+import { WelcomeCard } from './welcome-card'
+import { MetricsRow } from './metrics-row'
+import { PrioritiesList } from './priorities-list'
+import { RecentApplications } from './recent-applications'
+import { AIInsightsPanel } from './ai-insights-panel'
 
 const stagger = {
   animate: { transition: { staggerChildren: 0.1 } },
-};
+}
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
-};
+}
 
 export function DashboardPage() {
   return (
@@ -1397,7 +1397,7 @@ export function DashboardPage() {
         <RecentApplications />
       </motion.div>
     </motion.div>
-  );
+  )
 }
 ```
 
@@ -1525,10 +1525,10 @@ Sensors: `useSensor(PointerSensor, { activationConstraint: { distance: 5 } })` t
 
 ```tsx
 // src/components/pipeline/pipeline-page.tsx
-import { PageHeader } from '@/components/shared/page-header';
-import { KanbanBoard } from './kanban-board';
-import { Button } from '@/components/ui/button';
-import { Plus, Filter } from 'lucide-react';
+import { PageHeader } from '@/components/shared/page-header'
+import { KanbanBoard } from './kanban-board'
+import { Button } from '@/components/ui/button'
+import { Plus, Filter } from 'lucide-react'
 
 export function PipelinePage() {
   return (
@@ -1551,7 +1551,7 @@ export function PipelinePage() {
       />
       <KanbanBoard />
     </div>
-  );
+  )
 }
 ```
 
@@ -1700,31 +1700,31 @@ git commit -m "feat: add duplicate detection alert banner with savings highlight
 
 ```tsx
 // src/components/talent-pool/talent-pool-page.tsx
-import { useState, useMemo } from 'react';
-import { PageHeader } from '@/components/shared/page-header';
-import { CandidateSearch } from './candidate-search';
-import { CandidateTable } from './candidate-table';
-import { DuplicateAlert } from './duplicate-alert';
-import { Button } from '@/components/ui/button';
-import { Upload, UserPlus } from 'lucide-react';
-import { mockCandidates } from '@/lib/mocks/candidates';
+import { useState, useMemo } from 'react'
+import { PageHeader } from '@/components/shared/page-header'
+import { CandidateSearch } from './candidate-search'
+import { CandidateTable } from './candidate-table'
+import { DuplicateAlert } from './duplicate-alert'
+import { Button } from '@/components/ui/button'
+import { Upload, UserPlus } from 'lucide-react'
+import { mockCandidates } from '@/lib/mocks/candidates'
 
 export function TalentPoolPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('')
+  const [activeFilter, setActiveFilter] = useState('all')
 
   const filteredCandidates = useMemo(() => {
-    let result = mockCandidates;
+    let result = mockCandidates
     if (searchQuery) {
-      const q = searchQuery.toLowerCase();
+      const q = searchQuery.toLowerCase()
       result = result.filter(
         (c) => c.name.toLowerCase().includes(q) || c.role.toLowerCase().includes(q) || c.skills.some((s) => s.toLowerCase().includes(q)),
-      );
+      )
     }
-    if (activeFilter === 'high-score') result = result.filter((c) => c.aiScore >= 80);
-    if (activeFilter === 'duplicates') result = result.filter((c) => c.isDuplicate);
-    return result;
-  }, [searchQuery, activeFilter]);
+    if (activeFilter === 'high-score') result = result.filter((c) => c.aiScore >= 80)
+    if (activeFilter === 'duplicates') result = result.filter((c) => c.isDuplicate)
+    return result
+  }, [searchQuery, activeFilter])
 
   return (
     <div className="space-y-6">
@@ -1748,7 +1748,7 @@ export function TalentPoolPage() {
       <CandidateSearch query={searchQuery} onQueryChange={setSearchQuery} activeFilter={activeFilter} onFilterChange={setActiveFilter} />
       <CandidateTable candidates={filteredCandidates} />
     </div>
-  );
+  )
 }
 ```
 
@@ -2043,7 +2043,7 @@ git commit -m "feat: add Reports view with hiring funnel, trends, and source cha
 Wrap the app in `ThemeProvider` from `next-themes`:
 
 ```tsx
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from 'next-themes'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -2053,7 +2053,7 @@ createRoot(document.getElementById('root')!).render(
       </TooltipProvider>
     </ThemeProvider>
   </StrictMode>,
-);
+)
 ```
 
 - [ ] **Step 2: Add toggle button to top nav**

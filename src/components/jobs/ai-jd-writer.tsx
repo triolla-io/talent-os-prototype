@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Copy, CheckCircle2, Wand2, ArrowRight } from 'lucide-react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { cn } from '@/lib/utils';
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { Sparkles, Copy, CheckCircle2, Wand2, ArrowRight } from 'lucide-react'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { cn } from '@/lib/utils'
 
-const QUICK_CHIPS = ['Engineering', 'Product', 'Design', 'Sales', 'Marketing', 'Operations'];
+const QUICK_CHIPS = ['Engineering', 'Product', 'Design', 'Sales', 'Marketing', 'Operations']
 
 const MOCK_JD = `## Senior React Engineer
 
@@ -34,64 +34,64 @@ We are looking for an experienced Senior React Engineer to help build our next-g
 • Meaningful equity from day one
 • Fully remote with flexible hours
 • Comprehensive health, dental & vision
-• $2,000 annual learning budget`;
+• $2,000 annual learning budget`
 
 interface AIJDWriterProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  open: boolean
+  onOpenChange: (open: boolean) => void
 }
 
 export function AIJDWriter({ open, onOpenChange }: AIJDWriterProps) {
-  const [step, setStep] = useState<'input' | 'generating' | 'done'>('input');
-  const [prompt, setPrompt] = useState('');
-  const [generatedText, setGeneratedText] = useState('');
-  const [copied, setCopied] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState<'input' | 'generating' | 'done'>('input')
+  const [prompt, setPrompt] = useState('')
+  const [generatedText, setGeneratedText] = useState('')
+  const [copied, setCopied] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (open) {
-      setStep('input');
-      setPrompt('');
-      setGeneratedText('');
-      setCopied(false);
+      setStep('input')
+      setPrompt('')
+      setGeneratedText('')
+      setCopied(false)
     }
-  }, [open]);
+  }, [open])
 
   useEffect(() => {
     if (step === 'generating') {
-      let currentIndex = 0;
-      setGeneratedText('');
+      let currentIndex = 0
+      setGeneratedText('')
 
       const interval = setInterval(() => {
         if (currentIndex < MOCK_JD.length) {
-          const chunkSize = Math.floor(Math.random() * 4) + 2;
-          setGeneratedText((prev) => prev + MOCK_JD.substring(currentIndex, currentIndex + chunkSize));
-          currentIndex += chunkSize;
+          const chunkSize = Math.floor(Math.random() * 4) + 2
+          setGeneratedText((prev) => prev + MOCK_JD.substring(currentIndex, currentIndex + chunkSize))
+          currentIndex += chunkSize
           if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight
           }
         } else {
-          clearInterval(interval);
-          setStep('done');
+          clearInterval(interval)
+          setStep('done')
         }
-      }, 12);
+      }, 12)
 
-      return () => clearInterval(interval);
+      return () => clearInterval(interval)
     }
-  }, [step]);
+  }, [step])
 
   const handleGenerate = () => {
-    if (!prompt.trim()) return;
-    setStep('generating');
-  };
+    if (!prompt.trim()) return
+    setStep('generating')
+  }
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(generatedText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+    navigator.clipboard.writeText(generatedText)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -399,5 +399,5 @@ export function AIJDWriter({ open, onOpenChange }: AIJDWriterProps) {
         </div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

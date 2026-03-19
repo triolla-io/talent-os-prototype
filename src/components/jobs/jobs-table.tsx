@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,20 +7,20 @@ import {
   flexRender,
   createColumnHelper,
   type SortingState,
-} from '@tanstack/react-table';
-import { motion } from 'motion/react';
-import { ChevronUp, ChevronDown, ChevronsUpDown, MoreHorizontal, BarChart2, ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+} from '@tanstack/react-table'
+import { motion } from 'motion/react'
+import { ChevronUp, ChevronDown, ChevronsUpDown, MoreHorizontal, BarChart2, ChevronLeft, ChevronRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import type { Job } from '@/types';
+} from '@/components/ui/dropdown-menu'
+import type { Job } from '@/types'
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -29,32 +29,32 @@ import type { Job } from '@/types';
 function StatusBadge({ status }: { status: Job['status'] }) {
   switch (status) {
     case 'active':
-      return <Badge className="bg-success/10 text-success border border-success/30">{status}</Badge>;
+      return <Badge className="bg-success/10 text-success border border-success/30">{status}</Badge>
     case 'draft':
-      return <Badge variant="secondary">{status}</Badge>;
+      return <Badge variant="secondary">{status}</Badge>
     case 'closed':
-      return <Badge variant="outline">{status}</Badge>;
+      return <Badge variant="outline">{status}</Badge>
     case 'paused':
-      return <Badge className="bg-warning/10 text-warning border border-warning/30">{status}</Badge>;
+      return <Badge className="bg-warning/10 text-warning border border-warning/30">{status}</Badge>
     default:
-      return <Badge>{status}</Badge>;
+      return <Badge>{status}</Badge>
   }
 }
 
 function getRelativeDate(postedDate: string) {
-  const diffDays = Math.floor((Date.now() - new Date(postedDate).getTime()) / 86400000);
-  if (diffDays === 0) return 'Today';
-  if (diffDays === 1) return 'Yesterday';
-  if (diffDays < 30) return `${diffDays} days ago`;
-  const months = Math.floor(diffDays / 30);
-  return `${months} month${months > 1 ? 's' : ''} ago`;
+  const diffDays = Math.floor((Date.now() - new Date(postedDate).getTime()) / 86400000)
+  if (diffDays === 0) return 'Today'
+  if (diffDays === 1) return 'Yesterday'
+  if (diffDays < 30) return `${diffDays} days ago`
+  const months = Math.floor(diffDays / 30)
+  return `${months} month${months > 1 ? 's' : ''} ago`
 }
 
 // ---------------------------------------------------------------------------
 // Column helper
 // ---------------------------------------------------------------------------
 
-const columnHelper = createColumnHelper<Job>();
+const columnHelper = createColumnHelper<Job>()
 
 const columns = [
   columnHelper.accessor('title', {
@@ -79,13 +79,13 @@ const columns = [
   columnHelper.accessor('candidateCount', {
     header: 'Candidates',
     cell: ({ getValue }) => {
-      const count = getValue();
+      const count = getValue()
       return (
         <div className="flex items-center gap-2">
           <span className="font-medium">{count}</span>
           {count > 0 && <BarChart2 className="w-3.5 h-3.5 text-primary opacity-60" />}
         </div>
-      );
+      )
     },
   }),
 
@@ -103,7 +103,7 @@ const columns = [
     id: 'actions',
     header: 'Actions',
     cell: ({ row }) => {
-      const job = row.original;
+      const job = row.original
       return (
         <div className="flex items-center justify-end gap-1">
           <Button variant="ghost" size="sm" className="text-xs">
@@ -136,21 +136,21 @@ const columns = [
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      );
+      )
     },
   }),
-];
+]
 
 // ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
 
 interface JobsTableProps {
-  jobs: Job[];
+  jobs: Job[]
 }
 
 export function JobsTable({ jobs }: JobsTableProps) {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([])
 
   const table = useReactTable({
     data: jobs,
@@ -163,11 +163,11 @@ export function JobsTable({ jobs }: JobsTableProps) {
     initialState: {
       pagination: { pageSize: 10, pageIndex: 0 },
     },
-  });
+  })
 
-  const { pageIndex, pageSize } = table.getState().pagination;
-  const totalRows = table.getFilteredRowModel().rows.length;
-  const pageCount = table.getPageCount();
+  const { pageIndex, pageSize } = table.getState().pagination
+  const totalRows = table.getFilteredRowModel().rows.length
+  const pageCount = table.getPageCount()
 
   return (
     <div className="flex flex-col gap-4">
@@ -179,8 +179,8 @@ export function JobsTable({ jobs }: JobsTableProps) {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id} className="bg-muted/40 border-b">
                 {headerGroup.headers.map((header) => {
-                  const canSort = header.column.getCanSort() && header.id !== 'actions';
-                  const sortDir = header.column.getIsSorted();
+                  const canSort = header.column.getCanSort() && header.id !== 'actions'
+                  const sortDir = header.column.getIsSorted()
                   return (
                     <th
                       key={header.id}
@@ -207,7 +207,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
                         )}
                       </div>
                     </th>
-                  );
+                  )
                 })}
               </tr>
             ))}
@@ -216,7 +216,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
           {/* Body */}
           <tbody>
             {table.getRowModel().rows.map((row, index) => {
-              const isEven = index % 2 === 0;
+              const isEven = index % 2 === 0
 
               return (
                 <motion.tr
@@ -232,7 +232,7 @@ export function JobsTable({ jobs }: JobsTableProps) {
                     </td>
                   ))}
                 </motion.tr>
-              );
+              )
             })}
 
             {table.getRowModel().rows.length === 0 && (
@@ -274,5 +274,5 @@ export function JobsTable({ jobs }: JobsTableProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

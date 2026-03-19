@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Search, Sparkles, Bell, ChevronDown, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { Search, Sparkles, Bell, ChevronDown, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 export function TopNav() {
-  const [searchFocused, setSearchFocused] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchFocused, setSearchFocused] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
 
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-border bg-card/80 backdrop-blur-md">
@@ -86,5 +86,5 @@ export function TopNav() {
         </div>
       </div>
     </header>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-import { motion } from 'motion/react';
-import { Briefcase, Users, Trophy, Brain } from 'lucide-react';
-import { AnimatedCounter } from '@/components/shared/animated-counter';
-import { dashboardMetrics } from '@/lib/mocks/metrics';
+import { motion } from 'motion/react'
+import { Briefcase, Users, Trophy, Brain } from 'lucide-react'
+import { AnimatedCounter } from '@/components/shared/animated-counter'
+import { dashboardMetrics } from '@/lib/mocks/metrics'
 
 const METRICS = [
   {
@@ -41,13 +41,13 @@ const METRICS = [
     trendClass: 'text-success',
     isAI: true,
   },
-];
+]
 
 export function MetricsRow() {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {METRICS.map((metric, i) => {
-        const Icon = metric.icon;
+        const Icon = metric.icon
         return (
           <motion.div
             key={metric.label}
@@ -81,8 +81,8 @@ export function MetricsRow() {
               <p className={`text-xs mt-1 font-medium ${metric.trendClass}`}>{metric.trend}</p>
             </div>
           </motion.div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

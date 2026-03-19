@@ -1,12 +1,12 @@
-import { useState, useCallback } from "react";
-import type { PageId } from "@/types";
+import { useState, useCallback } from 'react'
+import type { PageId } from '@/types'
 
-export function useActivePage(initialPage: PageId = "dashboard") {
-  const [activePage, setActivePage] = useState<PageId>(initialPage);
+export function useActivePage(initialPage: PageId = 'dashboard') {
+  const [activePage, setActivePage] = useState<PageId>(initialPage)
 
   const navigate = useCallback((page: PageId) => {
-    setActivePage(page);
-  }, []);
+    setActivePage(page)
+  }, [])
 
-  return { activePage, navigate } as const;
+  return { activePage, navigate } as const
 }

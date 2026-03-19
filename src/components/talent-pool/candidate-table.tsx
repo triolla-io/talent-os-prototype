@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,47 +7,47 @@ import {
   flexRender,
   createColumnHelper,
   type SortingState,
-} from '@tanstack/react-table';
-import { motion } from 'motion/react';
-import { ChevronUp, ChevronDown, ChevronsUpDown, MoreHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+} from '@tanstack/react-table'
+import { motion } from 'motion/react'
+import { ChevronUp, ChevronDown, ChevronsUpDown, MoreHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { ScoreBadge } from '@/components/shared/score-badge';
-import type { Candidate, PipelineStage } from '@/types';
+} from '@/components/ui/dropdown-menu'
+import { ScoreBadge } from '@/components/shared/score-badge'
+import type { Candidate, PipelineStage } from '@/types'
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
 function getRelativeTime(dateStr: string) {
-  const diffDays = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
-  if (diffDays === 0) return 'Today';
-  if (diffDays === 1) return 'Yesterday';
-  return `${diffDays} days ago`;
+  const diffDays = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000)
+  if (diffDays === 0) return 'Today'
+  if (diffDays === 1) return 'Yesterday'
+  return `${diffDays} days ago`
 }
 
 function StatusBadge({ status }: { status: PipelineStage }) {
   switch (status) {
     case 'new':
-      return <Badge variant="default">{status}</Badge>;
+      return <Badge variant="default">{status}</Badge>
     case 'screening':
-      return <Badge variant="outline">{status}</Badge>;
+      return <Badge variant="outline">{status}</Badge>
     case 'interview':
-      return <Badge variant="secondary">{status}</Badge>;
+      return <Badge variant="secondary">{status}</Badge>
     case 'offer':
-      return <Badge className="bg-warning/10 text-warning border border-warning/30">{status}</Badge>;
+      return <Badge className="bg-warning/10 text-warning border border-warning/30">{status}</Badge>
     case 'hired':
-      return <Badge className="bg-success/10 text-success border border-success/30">{status}</Badge>;
+      return <Badge className="bg-success/10 text-success border border-success/30">{status}</Badge>
     case 'rejected':
-      return <Badge className="bg-destructive/10 text-destructive border border-destructive/30">{status}</Badge>;
+      return <Badge className="bg-destructive/10 text-destructive border border-destructive/30">{status}</Badge>
   }
 }
 
@@ -55,14 +55,14 @@ function StatusBadge({ status }: { status: PipelineStage }) {
 // Column helper
 // ---------------------------------------------------------------------------
 
-const columnHelper = createColumnHelper<Candidate>();
+const columnHelper = createColumnHelper<Candidate>()
 
 const columns = [
   columnHelper.accessor('name', {
     id: 'candidate',
     header: 'Candidate',
     cell: ({ row }) => {
-      const { name, email, avatar, isDuplicate } = row.original;
+      const { name, email, avatar, isDuplicate } = row.original
       return (
         <div className="flex items-center gap-3 min-w-0">
           <img src={avatar} alt={name} className="w-8 h-8 rounded-full object-cover shrink-0" />
@@ -78,7 +78,7 @@ const columns = [
             <p className="text-xs text-muted-foreground truncate">{email}</p>
           </div>
         </div>
-      );
+      )
     },
     size: 260,
   }),
@@ -112,7 +112,7 @@ const columns = [
     id: 'actions',
     header: 'Actions',
     cell: ({ row }) => {
-      const candidate = row.original;
+      const candidate = row.original
       return (
         <div className="flex items-center gap-1">
           <Button variant="ghost" size="sm" className="text-xs">
@@ -138,21 +138,21 @@ const columns = [
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      );
+      )
     },
   }),
-];
+]
 
 // ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
 
 interface CandidateTableProps {
-  candidates: Candidate[];
+  candidates: Candidate[]
 }
 
 export function CandidateTable({ candidates }: CandidateTableProps) {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([])
 
   const table = useReactTable({
     data: candidates,
@@ -163,11 +163,11 @@ export function CandidateTable({ candidates }: CandidateTableProps) {
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: { pagination: { pageSize: 10, pageIndex: 0 } },
-  });
+  })
 
-  const { pageIndex, pageSize } = table.getState().pagination;
-  const totalRows = table.getFilteredRowModel().rows.length;
-  const pageCount = table.getPageCount();
+  const { pageIndex, pageSize } = table.getState().pagination
+  const totalRows = table.getFilteredRowModel().rows.length
+  const pageCount = table.getPageCount()
 
   return (
     <div className="flex flex-col gap-4">
@@ -179,8 +179,8 @@ export function CandidateTable({ candidates }: CandidateTableProps) {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id} className="bg-muted/40 border-b">
                 {headerGroup.headers.map((header) => {
-                  const canSort = header.column.getCanSort();
-                  const sortDir = header.column.getIsSorted();
+                  const canSort = header.column.getCanSort()
+                  const sortDir = header.column.getIsSorted()
                   return (
                     <th
                       key={header.id}
@@ -206,7 +206,7 @@ export function CandidateTable({ candidates }: CandidateTableProps) {
                         )}
                       </div>
                     </th>
-                  );
+                  )
                 })}
               </tr>
             ))}
@@ -215,8 +215,8 @@ export function CandidateTable({ candidates }: CandidateTableProps) {
           {/* Body */}
           <tbody>
             {table.getRowModel().rows.map((row, index) => {
-              const isDuplicate = row.original.isDuplicate;
-              const isEven = index % 2 === 0;
+              const isDuplicate = row.original.isDuplicate
+              const isEven = index % 2 === 0
 
               return (
                 <motion.tr
@@ -236,7 +236,7 @@ export function CandidateTable({ candidates }: CandidateTableProps) {
                     </td>
                   ))}
                 </motion.tr>
-              );
+              )
             })}
 
             {table.getRowModel().rows.length === 0 && (
@@ -278,5 +278,5 @@ export function CandidateTable({ candidates }: CandidateTableProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }
