@@ -3,6 +3,7 @@ import { PageHeader } from '@/components/shared/page-header'
 import { CandidateSearch } from './candidate-search'
 import { CandidateTable } from './candidate-table'
 import { DuplicateAlert } from './duplicate-alert'
+import { AddCandidateModal } from '@/components/shared/add-candidate-modal'
 import { Button } from '@/components/ui/button'
 import { Upload, UserPlus } from 'lucide-react'
 import { mockCandidates } from '@/lib/mocks/candidates'
@@ -29,6 +30,7 @@ const fadeUp: Variants = {
 
 export function TalentPoolPage() {
   const [searchQuery, setSearchQuery] = useState('')
+  const [addOpen, setAddOpen] = useState(false)
   // "all" | "high-score" | "available" | "referred" | "duplicates"
   const [activeFilter, setActiveFilter] = useState<'all' | 'high-score' | 'available' | 'referred' | 'duplicates'>('all')
 
@@ -65,7 +67,7 @@ export function TalentPoolPage() {
                 <Upload className="w-4 h-4 mr-2" />
                 Import CVs
               </Button>
-              <Button size="sm">
+              <Button size="sm" onClick={() => setAddOpen(true)}>
                 <UserPlus className="w-4 h-4 mr-2" />
                 Add Candidate
               </Button>
@@ -85,6 +87,8 @@ export function TalentPoolPage() {
       <motion.div variants={fadeUp}>
         <CandidateTable candidates={filteredCandidates} />
       </motion.div>
+
+      <AddCandidateModal open={addOpen} onOpenChange={setAddOpen} />
     </motion.div>
   )
 }
